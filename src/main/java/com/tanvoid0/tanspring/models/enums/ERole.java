@@ -1,4 +1,4 @@
-package com.tanvoid0.tanspring.models;
+package com.tanvoid0.tanspring.models.enums;
 
 public enum ERole {
   ROLE_USER,

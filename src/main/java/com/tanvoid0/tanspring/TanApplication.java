@@ -1,12 +1,9 @@
 package com.tanvoid0.tanspring;
 
-import com.tanvoid0.tanspring.models.Address;
-import com.tanvoid0.tanspring.models.ERole;
-import com.tanvoid0.tanspring.models.Gender;
+import java.util.List;
 import com.tanvoid0.tanspring.models.Role;
-import com.tanvoid0.tanspring.models.Student;
+import com.tanvoid0.tanspring.models.enums.ERole;
 import com.tanvoid0.tanspring.repository.RoleRepository;
-import com.tanvoid0.tanspring.repository.StudentRepository;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,10 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @SpringBootApplication
 public class TanApplication {

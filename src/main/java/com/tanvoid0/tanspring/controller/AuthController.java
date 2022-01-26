@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tanvoid0.tanspring.models.ERole;
+import com.tanvoid0.tanspring.models.enums.ERole;
 import com.tanvoid0.tanspring.models.Role;
 import com.tanvoid0.tanspring.models.User;
 import com.tanvoid0.tanspring.payload.request.LoginRequest;

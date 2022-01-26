@@ -1,5 +1,7 @@
 package com.tanvoid0.tanspring.models;
 
+import com.tanvoid0.tanspring.models.enums.ERole;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
