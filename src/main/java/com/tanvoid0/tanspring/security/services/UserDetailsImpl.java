@@ -15,16 +15,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class UserDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;
 
-  private String id;
+  private final String id;
 
-  private String username;
+  private final String username;
 
-  private String email;
+  private final String email;
 
   @JsonIgnore
-  private String password;
+  private final String password;
 
-  private Collection<? extends GrantedAuthority> authorities;
+  private final Collection<? extends GrantedAuthority> authorities;
 
   public UserDetailsImpl(String id, String username, String email, String password,
       Collection<? extends GrantedAuthority> authorities) {
@@ -93,10 +93,12 @@ public class UserDetailsImpl implements UserDetails {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
+    if (this == o) {
       return true;
-    if (o == null || getClass() != o.getClass())
+    }
+    if (o == null || getClass() != o.getClass()) {
       return false;
+    }
     UserDetailsImpl user = (UserDetailsImpl) o;
     return Objects.equals(id, user.id);
   }
