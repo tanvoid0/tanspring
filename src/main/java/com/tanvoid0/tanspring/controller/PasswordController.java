@@ -22,18 +22,21 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/password")
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping("/api/password")
 public class PasswordController {
-  @Autowired PasswordRepository passwordRepository;
+  @Autowired
+  PasswordRepository passwordRepository;
 
   @GetMapping
   public ResponseEntity<List<PasswordModel>> getPasswordRepository(@RequestParam(required = false) String name) {
     try {
       List<PasswordModel> data = new ArrayList<PasswordModel>();
-      if (name == null)
-        passwordRepository.findAll().forEach(data::add);
-      else
-        passwordRepository.findByNameContaining(name).forEach(data::add);
+        if (name == null) {
+            passwordRepository.findAll().forEach(data::add);
+        } else {
+            passwordRepository.findByNameContaining(name).forEach(data::add);
+        }
 
       if (data.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

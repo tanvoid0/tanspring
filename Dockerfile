@@ -1,7 +1,9 @@
-FROM eclipse-temurin:17
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y inotify-tools dos2unix-tools
+FROM openjdk:11-jdk-alpine
 
-ENV HOME=/app
-RUN mkdir -p $HOME
-WORKDIR $HOME
+WORKDIR /opt/app
+
+ARG JAR_FILE=target/spring-boot-web.jar
+
+COPY ${JAR_FILE} app.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
