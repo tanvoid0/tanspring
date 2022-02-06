@@ -2,6 +2,12 @@ package com.tanvoid0.tanspring.security.jwt;
 
 import java.util.Date;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import com.tanvoid0.tanspring.security.services.UserDetailsImpl;
-import io.jsonwebtoken.*;
 
 @Component
 public class JwtUtils {
@@ -24,11 +29,14 @@ public class JwtUtils {
   public String generateJwtToken(Authentication authentication) {
 
     UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+    String username = userPrincipal.getUsername();
+    Date date = new Date();
+    Date expDate = new Date((new Date()).getTime() + (jwtExpirationMs * 7));
 
     return Jwts.builder()
-        .setSubject((userPrincipal.getUsername()))
-        .setIssuedAt(new Date())
-        .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+        .setSubject(username)
+        .setIssuedAt(date)
+        .setExpiration(expDate)
         .signWith(SignatureAlgorithm.HS512, jwtSecret)
         .compact();
   }
