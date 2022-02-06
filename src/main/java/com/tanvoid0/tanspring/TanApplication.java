@@ -1,8 +1,11 @@
 package com.tanvoid0.tanspring;
 
 import com.tanvoid0.tanspring.models.Address;
+import com.tanvoid0.tanspring.models.ERole;
 import com.tanvoid0.tanspring.models.Gender;
+import com.tanvoid0.tanspring.models.Role;
 import com.tanvoid0.tanspring.models.Student;
+import com.tanvoid0.tanspring.repository.RoleRepository;
 import com.tanvoid0.tanspring.repository.StudentRepository;
 
 import org.springframework.boot.CommandLineRunner;
@@ -22,6 +25,40 @@ public class TanApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(TanApplication.class, args);
+  }
+
+  @Bean
+  CommandLineRunner runner(
+      RoleRepository repository,
+      MongoTemplate template
+  ) {
+    return args -> {
+      checkRole(repository, template, ERole.ROLE_USER);
+      checkRole(repository, template, ERole.ROLE_MODERATOR);
+      checkRole(repository, template, ERole.ROLE_ADMIN);
+    };
+  }
+
+  void checkRole(RoleRepository repository, MongoTemplate template, ERole role) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("name").is(role));
+    List<Role> userRole = template.find(query, Role.class);
+
+    if (userRole.size() > 1) {
+      throw new IllegalStateException(
+          "Found many roles with same name"
+      );
+    } else if (userRole.size() == 1) {
+      System.out.println("Role " + role + " already exists");
+    }
+
+    if (userRole.isEmpty()) {
+      Role r = new Role(
+          role
+      );
+      System.out.println("Inserting new role " + role);
+      repository.save(r);
+    }
   }
 
   // TODO: Need to add these data to the database before running authentiations

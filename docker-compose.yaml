@@ -1,5 +1,19 @@
 version: "3.8"
 services:
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+      - ./.m2:/root/.m2
+    working_dir: /app
+    command: sh run.sh
+    ports:
+      - 8080:8080
+      - 35729:35729
+      - 5005:5005
+
   mongodb:
     image: mongo
     container_name: mongodb
@@ -21,7 +35,7 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
       - ME_CONFIG_MONGODB_SERVER=mongodb
 volumes:
-  data: {}
+  data: { }
 
 networks:
   default:
