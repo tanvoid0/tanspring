@@ -1,9 +1,9 @@
 package com.tanvoid0.tanspring;
 
 import java.util.List;
-import com.tanvoid0.tanspring.models.Role;
-import com.tanvoid0.tanspring.models.enums.ERole;
-import com.tanvoid0.tanspring.repository.RoleRepository;
+import com.tanvoid0.tanspring.security.models.Role;
+import com.tanvoid0.tanspring.enums.ERole;
+import com.tanvoid0.tanspring.security.RoleRepository;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
