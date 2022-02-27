@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import com.tanvoid0.tanspring.security.AuthService;
 import com.tanvoid0.tanspring.security.AuthServiceImpl;
-import com.tanvoid0.tanspring.security.jwt.JwtUtils;
+import com.tanvoid0.tanspring.service.core.AttributeEncryptor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("passwordService")
-@RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@RequiredArgsConstructor(onConstructor_ = { @Autowired })
 @Slf4j
 @Transactional
 public class PasswordServiceImpl implements PasswordService {
@@ -43,7 +43,11 @@ public class PasswordServiceImpl implements PasswordService {
   @Override
   public List<PasswordModel> findByUser(String id) {
     List<PasswordModel> list = new ArrayList<PasswordModel>();
-    passwordRepository.findPasswordByUserId(id).forEach(list::add);
+    passwordRepository.findPasswordByUserId(id).forEach(data -> {
+      String pass = AttributeEncryptor.decrypt(data.getPassword());
+      data.setPassword(pass);
+      list.add(data);
+    });
 
     if (list.isEmpty()) {
       return null;
@@ -54,22 +58,28 @@ public class PasswordServiceImpl implements PasswordService {
 
   @Override
   public Optional<PasswordModel> findById(String id) {
-    return passwordRepository.findById(id);
+    Optional<PasswordModel> pass = passwordRepository.findById(id);
+    if (pass.isPresent()) {
+      pass.get().setPassword(AttributeEncryptor.decrypt(pass.get().getPassword()));
+      return pass;
+    }
+    return Optional.empty();
   }
 
   @Override
   public PasswordModel save(PasswordModel model) {
     String userId = AuthServiceImpl.getId();
-    // authService.getUser().getId();
-    PasswordModel data = new PasswordModel(
-        model.getName(),
-        model.getPassword(),
-        model.getPasswordType(),
-        model.getUrl(),
-        model.getDeveloper(),
-        userId
-    );
-    return passwordRepository.save(data);
+    model.setUserId(userId);
+    model.setPassword(AttributeEncryptor.encrypt(model.getPassword()));
+    // PasswordModel data = new PasswordModel(
+    //     model.getName(),
+    //     model.getPassword(),
+    //     model.getPasswordType(),
+    //     model.getUrl(),
+    //     model.getDeveloper(),
+    //     userId
+    // );
+    return passwordRepository.save(model);
   }
 
   @Override
@@ -79,7 +89,8 @@ public class PasswordServiceImpl implements PasswordService {
     if (data.isPresent()) {
       PasswordModel updatedData = data.get();
       updatedData.setName(model.getName());
-      updatedData.setPassword(model.getPassword());
+      updatedData.setUsername(model.getUsername());
+      updatedData.setPassword(AttributeEncryptor.encrypt(model.getPassword()));
       updatedData.setPasswordType(model.getPasswordType());
       updatedData.setUrl(model.getUrl());
       updatedData.setDeveloper(model.getDeveloper());
