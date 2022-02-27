@@ -1,19 +1,15 @@
 package com.tanvoid0.tanspring.security;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.Valid;
 
-import com.tanvoid0.tanspring.security.models.User;
+import com.tanvoid0.tanspring.models.user.service.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,15 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tanvoid0.tanspring.enums.ERole;
-import com.tanvoid0.tanspring.security.models.Role;
 import com.tanvoid0.tanspring.security.payload.request.LoginRequest;
 import com.tanvoid0.tanspring.security.payload.request.SignupRequest;
+import com.tanvoid0.tanspring.security.payload.response.AuthException;
 import com.tanvoid0.tanspring.security.payload.response.JwtResponse;
-import com.tanvoid0.tanspring.security.payload.response.MessageResponse;
 import com.tanvoid0.tanspring.security.jwt.JwtUtils;
-import com.tanvoid0.tanspring.security.services.UserDetailsImpl;
 
+@Slf4j
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
@@ -53,9 +47,16 @@ public class AuthController {
   AuthService authService;
 
   @PostMapping("/signin")
-  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+  public <T extends ResponseEntity> T authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    log.info(loginRequest.toString());
     JwtResponse data = authService.login(loginRequest.getUsername(), loginRequest.getPassword());
-    return ResponseEntity.ok(data);
+    log.info("Authentication data");
+    if (data.getError() == null) {
+      return (T) ResponseEntity.ok(data);
+    } else {
+      final AuthException ex = new AuthException(data.getError().getMessage());
+      return (T) ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.toMap());
+    }
   }
 
   @PostMapping("/signup")
