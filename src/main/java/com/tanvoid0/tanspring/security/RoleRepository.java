@@ -1,7 +1,7 @@
 package com.tanvoid0.tanspring.security;
 
 import com.tanvoid0.tanspring.enums.ERole;
-import com.tanvoid0.tanspring.security.models.Role;
+import com.tanvoid0.tanspring.models.user.models.Role;
 
 import java.util.Optional;
 
