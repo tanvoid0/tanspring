@@ -1,4 +1,4 @@
-package com.tanvoid0.tanspring.security;
+package com.tanvoid0.tanspring.security.archive;
 
 import com.tanvoid0.tanspring.enums.ERole;
 import com.tanvoid0.tanspring.models.user.models.Role;

@@ -1,4 +1,4 @@
-package com.tanvoid0.tanspring.security.services;
+package com.tanvoid0.tanspring.security.archive.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
