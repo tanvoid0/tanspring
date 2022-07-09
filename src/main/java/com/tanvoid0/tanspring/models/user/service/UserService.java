@@ -7,7 +7,7 @@ import com.tanvoid0.tanspring.models.user.models.UserVO;
 import java.util.List;
 
 public interface UserService {
-  List<UserVO> get();
+  List<UserVO> getAll();
 
   UserVO get(String id);
 

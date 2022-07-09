@@ -53,14 +53,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return new BCryptPasswordEncoder();
   }
 
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+  }
+
 //  @Override
 //  protected void configure(HttpSecurity http) throws Exception {
 //    http.cors().and().csrf().disable()
-//        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+//        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+//        .and()
 //        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 //        .authorizeRequests()
-//        .antMatchers("/v3/**").permitAll()
 //        .antMatchers("/api/auth/**").permitAll()
+//        .antMatchers("/api/user/**").permitAll()
 //        .antMatchers("/api/test/**").permitAll()
 //        .antMatchers("/api/password").permitAll()
 //        .anyRequest().authenticated();
@@ -68,8 +74,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 //  }
 
-//  @Override
-//  public void configure(WebSecurity web) throws Exception {
-//    web.ignoring().antMatchers("/v3/**");
-//  }
+  @Override
+  public void configure(WebSecurity web) throws Exception {
+    web.ignoring().antMatchers(
+        "/v3/**",
+        "/v2/api-docs",
+        "/configuration/ui",
+        "/swagger-resources/**",
+        "/configuration/security",
+        "/swagger-ui.html",
+        "/webjars/**");
+  }
 }
