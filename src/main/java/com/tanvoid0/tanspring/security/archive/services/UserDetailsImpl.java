@@ -1,4 +1,4 @@
-package com.tanvoid0.tanspring.security.services;
+package com.tanvoid0.tanspring.security.archive.services;
 
 import java.util.Collection;
 import java.util.List;

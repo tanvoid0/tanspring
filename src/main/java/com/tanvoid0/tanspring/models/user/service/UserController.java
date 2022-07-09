@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import com.tanvoid0.tanspring.models.user.models.NewUserVO;
 import com.tanvoid0.tanspring.models.user.models.UpdateUserVO;
 import com.tanvoid0.tanspring.models.user.models.UserVO;
-import com.tanvoid0.tanspring.security.jwt.JwtUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,9 +32,9 @@ import javax.validation.Valid;
 public class UserController {
   @Autowired
   UserServiceImpl service;
-
-  @Autowired
-  JwtUtils jwtUtils;
+//
+//  @Autowired
+//  JwtUtils jwtUtils;
 
   @GetMapping("")
   public List<UserVO> getAll() {

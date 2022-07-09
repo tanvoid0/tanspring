@@ -1,4 +1,4 @@
-package com.tanvoid0.tanspring.security.jwt;
+package com.tanvoid0.tanspring.security.archive.jwt;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.tanvoid0.tanspring.security.payload.response;
+package com.tanvoid0.tanspring.security.archive.payload.response;
 
 import io.jsonwebtoken.JwtException;
 import lombok.Data;

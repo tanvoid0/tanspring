@@ -1,4 +1,4 @@
-package com.tanvoid0.tanspring.security.payload.request;
+package com.tanvoid0.tanspring.security.archive.payload.request;
 
 import java.util.Set;
 

@@ -2,8 +2,6 @@ package com.tanvoid0.tanspring.models.test;
 
 import java.util.List;
 
-import com.tanvoid0.tanspring.security.jwt.JwtUtils;
-import com.tanvoid0.tanspring.security.services.UserDetailsImpl;
 import com.tanvoid0.tanspring.models.password.PasswordModel;
 import com.tanvoid0.tanspring.models.password.PasswordService;
 
@@ -20,46 +18,46 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/test")
 public class TestController {
-  @Autowired
-  PasswordService passwordService;
-
-  @Autowired
-  JwtUtils jwtUtils;
-
+  //  @Autowired
+//  PasswordService passwordService;
+//
+//  @Autowired
+//  JwtUtils jwtUtils;
+//
   @GetMapping("/all")
   @ResponseBody
   public String allAccess() {
     return "Public Content.";
   }
-
-  @GetMapping("/user")
-  @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-  public String userAccess() {
-    return "User Content.";
-  }
-
-  @GetMapping("/mod")
-  @PreAuthorize("hasRole('MODERATOR')")
-  public String moderatorAccess() {
-    return "Moderator Board.";
-  }
-
-  @GetMapping("/admin")
-  @PreAuthorize("hasRole('ADMIN')")
-  public String adminAccess() {
-    return "Admin Board.";
-  }
-
-  @GetMapping("/password")
-  @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-  public List<PasswordModel> passwords() {
-    return passwordService.findByNameContaining("Diss");
-  }
-
-  @GetMapping("/auth")
-  @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-  public Object auth() {
-    UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    return user.getId();
-  }
+//
+//  @GetMapping("/user")
+//  @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+//  public String userAccess() {
+//    return "User Content.";
+//  }
+//
+//  @GetMapping("/mod")
+//  @PreAuthorize("hasRole('MODERATOR')")
+//  public String moderatorAccess() {
+//    return "Moderator Board.";
+//  }
+//
+//  @GetMapping("/admin")
+//  @PreAuthorize("hasRole('ADMIN')")
+//  public String adminAccess() {
+//    return "Admin Board.";
+//  }
+//
+//  @GetMapping("/password")
+//  @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+//  public List<PasswordModel> passwords() {
+////    return passwordService.findByNameContaining("Diss");
+//  }
+//
+//  @GetMapping("/auth")
+//  @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+//  public Object auth() {
+//    UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//    return user.getId();
+//  }
 }
