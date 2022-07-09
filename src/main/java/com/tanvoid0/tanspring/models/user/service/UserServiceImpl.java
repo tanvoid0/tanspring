@@ -27,8 +27,9 @@ public class UserServiceImpl implements UserService {
   ModelMapper mapper;
 
   @Override
-  public List<UserVO> get() {
-    return repository.findAll().stream().map(item -> mapper.map(item, UserVO.class)).toList();
+  public List<UserVO> getAll() {
+    final List<User> users = repository.findAll();
+    return users.stream().map(item -> mapper.map(item, UserVO.class)).toList();
   }
 
   @Override

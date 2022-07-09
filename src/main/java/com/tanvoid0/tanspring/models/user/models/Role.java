@@ -1,10 +1,16 @@
 package com.tanvoid0.tanspring.models.user.models;
 
+import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import net.bytebuddy.implementation.bind.annotation.Super;
+
 import com.tanvoid0.tanspring.enums.ERole;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Data
+@SuperBuilder
 @Document(collection = "roles")
 public class Role {
   @Id
