@@ -1,6 +1,5 @@
 package com.tanvoid0.tanspring.models.user.service;
 
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 import com.tanvoid0.tanspring.models.user.models.NewUserVO;
@@ -25,9 +24,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
-@RestController
+//@CrossOrigin(origins = "*", maxAge = 3600)
 @Slf4j
+@RestController
 @RequestMapping("/api/user")
 public class UserController {
   @Autowired

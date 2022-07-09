@@ -2,7 +2,6 @@ package com.tanvoid0.tanspring.models.user.models;
 
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
-import net.bytebuddy.implementation.bind.annotation.Super;
 
 import com.tanvoid0.tanspring.enums.ERole;
 
