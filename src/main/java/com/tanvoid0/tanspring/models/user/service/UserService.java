@@ -13,7 +13,7 @@ public interface UserService {
 
   UserVO create(NewUserVO vo);
 
-  UserVO update(String id, UpdateUserVO vo);
+  UserVO update(UpdateUserVO vo);
 
   String delete(String id);
 }

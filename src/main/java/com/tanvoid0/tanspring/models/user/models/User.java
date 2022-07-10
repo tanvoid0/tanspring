@@ -1,7 +1,11 @@
 package com.tanvoid0.tanspring.models.user.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import com.tanvoid0.tanspring.security.role.Role;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +20,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @SuperBuilder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "users")
 public class User {
   @Id
@@ -34,6 +40,6 @@ public class User {
   @Size(max = 100)
   private String name;
 
-  @DBRef
+  @DBRef(lazy = true)
   private Set<Role> roles = new HashSet<>();
 }

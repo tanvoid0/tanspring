@@ -64,7 +64,8 @@ public class UserController {
   public UserVO update(@PathVariable("id") final String id, @Valid @RequestBody final UpdateUserVO updateVO) {
     log.info("Request to update a user with id {}", id);
     log.debug("Inbound payload is {}", updateVO.toString());
-    return service.update(id, updateVO);
+    updateVO.setId(id);
+    return service.update(updateVO);
   }
 
   @DeleteMapping("/{id}")

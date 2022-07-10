@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tanvoid0.tanspring.enums.ERole;
-import com.tanvoid0.tanspring.models.user.models.Role;
+import com.tanvoid0.tanspring.security.role.ERole;
+import com.tanvoid0.tanspring.security.role.Role;
 import com.tanvoid0.tanspring.models.user.models.User;
 import com.tanvoid0.tanspring.models.user.service.UserRepository;
 

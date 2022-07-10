@@ -8,7 +8,6 @@ import com.tanvoid0.tanspring.core.exception.MapConvertible;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 @Data
 @EqualsAndHashCode(callSuper = true)

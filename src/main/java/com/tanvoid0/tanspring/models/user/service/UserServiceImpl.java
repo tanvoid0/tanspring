@@ -5,13 +5,19 @@ import com.tanvoid0.tanspring.models.user.models.NewUserVO;
 import com.tanvoid0.tanspring.models.user.models.UpdateUserVO;
 import com.tanvoid0.tanspring.models.user.models.User;
 import com.tanvoid0.tanspring.models.user.models.UserVO;
+import com.tanvoid0.tanspring.security.role.ERole;
+import com.tanvoid0.tanspring.security.role.Role;
+import com.tanvoid0.tanspring.security.role.RoleService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
@@ -23,13 +29,19 @@ public class UserServiceImpl implements UserService {
   @Autowired
   UserValidator validator;
 
-  @NotNull
-  ModelMapper mapper;
+  //  private ModelMapper mapper = new ModelMapper();
+  @Autowired
+  private ModelMapper mapper;
+
+  @Autowired
+  private RoleService roleService;
+
 
   @Override
   public List<UserVO> getAll() {
     final List<User> users = repository.findAll();
-    return users.stream().map(item -> mapper.map(item, UserVO.class)).toList();
+    final List<UserVO> userVOs = users.stream().map(item -> mapper.map(item, UserVO.class)).toList();
+    return userVOs;
   }
 
   @Override
@@ -39,14 +51,14 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserVO create(NewUserVO newVO) {
-    final User entity = mapper.map(newVO, User.class);
+    final User entity = validator.validate(newVO);
     final User savedEntity = repository.save(entity);
     return mapper.map(savedEntity, UserVO.class);
   }
 
   @Override
-  public UserVO update(String id, UpdateUserVO updateVO) {
-    final User user = validator.existsById(id);
+  public UserVO update(UpdateUserVO updateVO) {
+    final User user = validator.validate(updateVO);
 
     final UserVO existingUserVO = mapper.map(user, UserVO.class);
 
