@@ -7,6 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import com.tanvoid0.tanspring.security.role.ERole;
+import com.tanvoid0.tanspring.security.role.Role;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -15,10 +21,10 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class NewUserVO {
 
-  public static final String NAME = "NewUser";
+  public static final String BASE_NAME = "NewUser";
 
   @Setter(value = AccessLevel.NONE)
-  private final String _type = NAME;
+  private final String _type = BASE_NAME;
 
   @NotNull
   private String username;
@@ -30,4 +36,6 @@ public class NewUserVO {
   private String password;
 
   private String name;
+
+  Set<ERole> roles = new HashSet<>();
 }
