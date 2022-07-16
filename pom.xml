@@ -2,27 +2,29 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <groupId>com.tanvoid0</groupId>
+    <artifactId>tanspring</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.6.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <!--        <relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
     </parent>
-    <groupId>com.tanvoid0</groupId>
-    <artifactId>tanspring</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+
     <name>tanspring</name>
     <description>tanspring</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>11</java.version>
     </properties>
+
     <dependencies>
         <!-- MongoDB -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
-        
+
         <!-- -->
 
         <dependency>
@@ -145,12 +147,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${project.parent.version}</version>
                 <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
+                    <mainClass>com.tanvoid0.tanspring.TanApplication</mainClass>
+                    <excludeDevtools>false</excludeDevtools>
                 </configuration>
             </plugin>
         </plugins>

@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -93,6 +94,6 @@ class UserRepositoryTest {
   }
 
   void cleanData() {
-    repository.deleteAllById(users.stream().map(User::getId).toList());
+    repository.deleteAllById(users.stream().map(User::getId).collect(Collectors.toList()));
   }
 }

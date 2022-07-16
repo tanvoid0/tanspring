@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public List<UserVO> getAll() {
     final List<User> users = repository.findAll();
-    final List<UserVO> userVOs = users.stream().map(item -> mapper.map(item, UserVO.class)).toList();
+    final List<UserVO> userVOs = users.stream().map(item -> mapper.map(item, UserVO.class)).collect(Collectors.toList());
     return userVOs;
   }
 

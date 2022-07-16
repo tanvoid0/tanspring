@@ -37,7 +37,7 @@ public class UserController {
 
   @GetMapping("")
   public List<UserVO> getAll() {
-    log.info("Return all users");
+    log.info("Return all users updated");
     return service.getAll();
   }
 

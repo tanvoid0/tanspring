@@ -1,3 +1,7 @@
+# Run Project
+
+`docker-compose up --build --remove-orphans`
+
 # Documentation Guide
 
 https://www.baeldung.com/spring-rest-openapi-documentation
