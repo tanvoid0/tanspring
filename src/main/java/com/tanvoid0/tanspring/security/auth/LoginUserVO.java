@@ -1,4 +1,4 @@
-package com.tanvoid0.tanspring.common.vo;
+package com.tanvoid0.tanspring.security.auth;
 
 import lombok.Data;
 

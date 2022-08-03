@@ -1,9 +1,9 @@
-package com.tanvoid0.tanspring.common.vo;
+package com.tanvoid0.tanspring.security.auth;
 
 import lombok.Data;
 
 @Data
-public class SignUpUserVO {
+public class NewUserVO {
   private String name;
   private String username;
   private String email;

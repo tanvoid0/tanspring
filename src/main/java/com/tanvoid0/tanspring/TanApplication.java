@@ -33,8 +33,8 @@ public class TanApplication implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    Set<String> roles = Set.of("ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER");
-    findOrCreateRoles(roles);
+//    Set<String> roles = Set.of("ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER");
+//    findOrCreateRoles(roles);
   }
 
   @GetMapping("")
