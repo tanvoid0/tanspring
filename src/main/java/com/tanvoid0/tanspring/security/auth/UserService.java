@@ -19,5 +19,5 @@ public interface UserService {
 
   JWTAuthResponseVO login(LoginUserVO loginVO);
 
-  long getId();
+  long getAuthUserId();
 }

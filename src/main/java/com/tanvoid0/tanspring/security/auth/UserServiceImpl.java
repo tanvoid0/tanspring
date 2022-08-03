@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public long getId() {
+  public long getAuthUserId() {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
     User user = repository.findByUsernameOrEmail(username, username).orElseThrow(() -> new ResourceNotFoundException("user", "usernameOrEmail", username));

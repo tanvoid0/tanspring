@@ -18,7 +18,6 @@ import javax.validation.constraints.NotNull;
 public class NewTodoVO {
   @Setter(AccessLevel.NONE)
   private static final String _type = "NewTodo";
-  private String id;
   @NotNull
   private String title;
   private String description;
