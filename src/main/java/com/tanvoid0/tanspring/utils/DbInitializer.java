@@ -18,6 +18,10 @@ public class DbInitializer {
   }
 
   public Role findOrCreateRole(String name) {
+    return getRole(name, roleRepository);
+  }
+
+  public static Role getRole(String name, RoleRepository roleRepository) {
     final Optional<Role> role = roleRepository.findByName(name);
     if (!role.isPresent()) {
       Role newRole = new Role();

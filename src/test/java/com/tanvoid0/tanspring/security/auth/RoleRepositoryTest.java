@@ -1,40 +1,65 @@
-//package com.tanvoid0.tanspring.security.auth;
-//
-//import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//import org.junit.jupiter.api.AfterEach;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-//
-//import java.util.Optional;
-//
-//@DataJpaTest
-//class RoleRepositoryTest {
-//
-//  @Autowired
-//  private RoleRepository repository;
-//
-//  @AfterEach
-//  void tearDown() {
-//    repository.deleteAll();
-//  }
-//
-//  @Test
-//  void findByName() {
-//    // given
-////    Role role = Role.builder().id(-1L).name("ROLE_USER").build();
-////    repository.save(role);
-////
-////    // when
-////    Optional<Role> result = repository.findByName("ROLE_USER");
-////
-////    // then
-////    assertThat(result).isEqualTo("ROLE_USER");
-//  }
-//
-//  @Test
-//  void existsByName() {
-//  }
-//}
+package com.tanvoid0.tanspring.security.auth;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ContextConfiguration;
+
+@ContextConfiguration(classes = {RoleRepository.class})
+@EnableAutoConfiguration
+@EntityScan(basePackages = {"com.tanvoid0.tanspring.security.auth"})
+@DataJpaTest
+class RoleRepositoryTest {
+  @Autowired
+  private RoleRepository roleRepository;
+
+  /**
+   * Method under test: {@link RoleRepository#findByName(String)}
+   */
+  @Test
+  void testFindByName() {
+    Role role = new Role();
+    role.setName("Name");
+
+    Role role1 = new Role();
+    role1.setName("Name");
+    roleRepository.save(role);
+    roleRepository.save(role1);
+    assertFalse(roleRepository.findByName("foo").isPresent());
+  }
+
+  /**
+   * Method under test: {@link RoleRepository#existsByName(String)}
+   */
+  @Test
+  void testExistsByName() {
+    Role role = new Role();
+    role.setName("Name");
+
+    Role role1 = new Role();
+    role1.setName("Name");
+    roleRepository.save(role);
+    roleRepository.save(role1);
+    assertFalse(roleRepository.existsByName("foo"));
+  }
+
+  /**
+   * Method under test: {@link RoleRepository#existsByName(String)}
+   */
+  @Test
+  void testExistsByName2() {
+    Role role = new Role();
+    role.setName("42");
+
+    Role role1 = new Role();
+    role1.setName("Name");
+    roleRepository.save(role);
+    roleRepository.save(role1);
+    assertTrue(roleRepository.existsByName("42"));
+  }
+}

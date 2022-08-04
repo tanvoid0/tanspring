@@ -1,5 +1,7 @@
 package com.tanvoid0.tanspring.security.auth;
 
+import static com.tanvoid0.tanspring.utils.DbInitializer.getRole;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +23,7 @@ public class RoleServiceImpl implements RoleService {
 
   @Override
   public Role findOrCreateRole(String name) {
-    final Optional<Role> role = roleRepository.findByName(name);
-    if (!role.isPresent()) {
-      Role newRole = new Role();
-      newRole.setName(name);
-      roleRepository.save(newRole);
-      return newRole;
-    }
-    return role.get();
+    return getRole(name, roleRepository);
   }
 
   @Override
