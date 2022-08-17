@@ -21,90 +21,95 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-  @Autowired
-  private AuthenticationManager authManager;
+    @Autowired
+    private AuthenticationManager authManager;
 
-  @Autowired
-  private UserRepository repository;
+    @Autowired
+    private UserRepository repository;
 
-  @Autowired
-  private RoleRepository roleRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-  @Autowired
-  private JwtTokenProvider tokenProvider;
+    @Autowired
+    private JwtTokenProvider tokenProvider;
 
-  @Autowired
-  private ModelMapper mapper;
+    @Autowired
+    private ModelMapper mapper;
 
-  @Override
-  public List<UserVO> getAll() {
-    return null;
-  }
-
-  @Override
-  public UserVO get(long id) {
-    return null;
-  }
-
-  @Override
-  public UserVO create(NewUserVO newVO) {
-    return null;
-  }
-
-  @Override
-  public UserVO update(UpdateUserVO updateVO) {
-    return null;
-  }
-
-  @Override
-  public boolean delete(long id) {
-    return false;
-  }
-
-  @Override
-  public UserVO register(NewUserVO newVO) {
-    // add check for username exists in a DB
-    if (repository.existsByUsername(newVO.getUsername())) {
-      throw new AuthException("Username is already taken!");
+    @Override
+    public List<UserVO> getAll() {
+        return null;
     }
 
-    // add check for email exists in DB
-    if (repository.existsByEmail(newVO.getEmail())) {
-      throw new AuthException("Email already taken!");
+    @Override
+    public UserVO get(long id) {
+        return null;
     }
 
-    // create user object
-    User user = mapper.map(newVO, User.class);
-    user.setPassword(passwordEncoder.encode(newVO.getPassword()));
+    @Override
+    public UserVO create(NewUserVO newVO) {
+        return null;
+    }
 
-    Role roles = roleRepository.findByName("ROLE_USER").get();
-    user.setRoles(Collections.singleton(roles));
+    @Override
+    public UserVO update(UpdateUserVO updateVO) {
+        return null;
+    }
 
-    User savedUser = repository.save(user);
-    return mapper.map(savedUser, UserVO.class);
-  }
+    @Override
+    public boolean delete(long id) {
+        return false;
+    }
 
-  @Override
-  public JWTAuthResponseVO login(LoginUserVO loginVO) {
-    Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(
-        loginVO.getUsernameOrEmail(), loginVO.getPassword()));
+    @Override
+    public UserVO register(NewUserVO newVO) {
+        // add check for username exists in a DB
+        if (repository.existsByUsername(newVO.getUsername())) {
+            throw new AuthException("Username is already taken!");
+        }
 
-    SecurityContextHolder.getContext().setAuthentication(authentication);
+        // add check for email exists in DB
+        if (repository.existsByEmail(newVO.getEmail())) {
+            throw new AuthException("Email already taken!");
+        }
 
-    // get token form tokenProvider
-    String token = tokenProvider.generateToken(authentication);
+        // create user object
+        User user = mapper.map(newVO, User.class);
+        user.setPassword(passwordEncoder.encode(newVO.getPassword()));
 
-    return new JWTAuthResponseVO(token);
-  }
+        Role roles = roleRepository.findByName("ROLE_USER").get();
+        user.setRoles(Collections.singleton(roles));
 
-  @Override
-  public long getAuthUserId() {
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    String username = auth.getName();
-    User user = repository.findByUsernameOrEmail(username, username).orElseThrow(() -> new ResourceNotFoundException("user", "usernameOrEmail", username));
-    return user.getId();
-  }
+        User savedUser = repository.save(user);
+        return mapper.map(savedUser, UserVO.class);
+    }
+
+    @Override
+    public JWTAuthResponseVO login(LoginUserVO loginVO) {
+        Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginVO.getUsernameOrEmail(), loginVO.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // get token form tokenProvider
+        String token = tokenProvider.generateToken(authentication);
+
+        return new JWTAuthResponseVO(token);
+    }
+
+    @Override
+    public long getAuthUserId() {
+        return this.getAuthUser().getId();
+    }
+
+    @Override
+    public UserVO getAuthUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = repository.findByUsernameOrEmail(username, username).orElseThrow(() -> new ResourceNotFoundException("user", "usernameOrEmail", username));
+        return mapper.map(user, UserVO.class);
+    }
 }
