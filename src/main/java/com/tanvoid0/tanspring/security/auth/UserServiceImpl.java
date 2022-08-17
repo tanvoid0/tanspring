@@ -58,13 +58,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO update(UpdateUserVO updateVO) {
-        final User user = repository.findById(updateVO.getId()).orElseThrow(() -> new ResourceNotFoundException("User", "id", updateVO.getId()));
+        final User entity = repository.findById(updateVO.getId()).orElseThrow(() -> new ResourceNotFoundException("User", "id", updateVO.getId()));
 
-        final User entity = mapper.map(updateVO, User.class);
-        if (!entity.getPassword().isEmpty()) {
+        mapper.map(updateVO, entity);
+
+        if (!updateVO.getPassword().isEmpty()) {
             entity.setPassword(passwordEncoder.encode(entity.getPassword()));
-        } else {
-            entity.setPassword(user.getPassword());
         }
 
         final User savedUser = repository.save(entity);
@@ -121,10 +120,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVO getAuthUser() {
+    public User getAuthUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-        User user = repository.findByUsernameOrEmail(username, username).orElseThrow(() -> new ResourceNotFoundException("user", "usernameOrEmail", username));
-        return mapper.map(user, UserVO.class);
+        return repository.findByUsernameOrEmail(username, username).orElseThrow(() -> new ResourceNotFoundException("user", "usernameOrEmail", username));
+    }
+
+    @Override
+    public UserVO getAuthUserVO() {
+        return mapper.map(this.getAuthUser(), UserVO.class);
     }
 }

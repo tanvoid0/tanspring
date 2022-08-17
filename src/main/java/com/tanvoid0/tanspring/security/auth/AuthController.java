@@ -56,7 +56,6 @@ public class AuthController {
 
     @ApiOperation("Get ALl users")
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
     public List<UserVO> getAll() {
         log.info("Find all users");
         return userService.getAll();
@@ -88,6 +87,6 @@ public class AuthController {
     @PostMapping("/authenticate")
     @PreAuthorize("hasRole('USER')")
     public UserVO authenticate() {
-        return userService.getAuthUser();
+        return userService.getAuthUserVO();
     }
 }

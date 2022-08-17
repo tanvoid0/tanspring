@@ -21,5 +21,7 @@ public interface UserService {
 
     long getAuthUserId();
 
-    UserVO getAuthUser();
+    User getAuthUser();
+
+    UserVO getAuthUserVO();
 }
