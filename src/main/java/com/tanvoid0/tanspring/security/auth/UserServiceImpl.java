@@ -41,12 +41,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserVO> getAll() {
-        return null;
+        final List<User> users = repository.findAll();
+        return users.stream().map(user -> mapper.map(user, UserVO.class)).toList();
     }
 
     @Override
-    public UserVO get(long id) {
-        return null;
+    public UserVO get(final long id) {
+        final User user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+        return mapper.map(user, UserVO.class);
     }
 
     @Override
@@ -56,12 +58,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO update(UpdateUserVO updateVO) {
-        return null;
+        final User user = repository.findById(updateVO.getId()).orElseThrow(() -> new ResourceNotFoundException("User", "id", updateVO.getId()));
+
+        final User entity = mapper.map(updateVO, User.class);
+        if (!entity.getPassword().isEmpty()) {
+            entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        } else {
+            entity.setPassword(user.getPassword());
+        }
+
+        final User savedUser = repository.save(entity);
+        return mapper.map(savedUser, UserVO.class);
     }
 
     @Override
     public boolean delete(long id) {
-        return false;
+        final User user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+        user.getRoles().removeAll(user.getRoles());
+        repository.deleteById(id);
+        return true;
     }
 
     @Override

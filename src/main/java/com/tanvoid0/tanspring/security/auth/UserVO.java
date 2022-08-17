@@ -13,7 +13,22 @@ import lombok.experimental.SuperBuilder;
 public class UserVO {
     private long id;
     private String name;
-    private String email;
-    private String password;
+    private String fullName;
     private String phone;
+    private String avatar;
+    private String coverImg;
+    private int yob; // year of birth
+    private String address;
+    private String degree;
+    private String title;
+    private String titles;
+    private String whatIDo;
+    private String about;
+    private String aboutDetailed;
+    private String username;
+    private String email;
+    private String publicEmail;
+    private String cv;
+    private String url;
+    private String password;
 }
