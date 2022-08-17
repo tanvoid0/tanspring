@@ -22,44 +22,43 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 @Entity
 @Table(name = "todos")
 public class Todo {
-  @Id
-  @GeneratedValue(
-      strategy = GenerationType.IDENTITY
-  )
-  private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-  @Column(nullable = false)
-  private String title;
+    @Column(nullable = false)
+    private String title;
 
-  @Column
-  private String description;
+    @Column
+    private String description;
 
-  @Column
-  private String icon;
+    @Column
+    private String icon;
 
-  @Column
-  private ZonedDateTime deadline;
+    @Column
+    private ZonedDateTime deadline;
 
-  @Column
-  private ZonedDateTime reminder;
+    @Column
+    private ZonedDateTime reminder;
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @CreationTimestamp
-  @Column(nullable = false)
-  private Date createdAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    @Column(nullable = false)
+    private Date createdAt;
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @UpdateTimestamp
-  @Column(nullable = true)
-  private Date updatedAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
+    @Column(nullable = true)
+    private Date updatedAt;
 
-  @Column(nullable = false)
-  private long userId;
+    @Column(nullable = false)
+    private long userId;
 }

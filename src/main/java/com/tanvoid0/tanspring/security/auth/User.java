@@ -1,7 +1,10 @@
 package com.tanvoid0.tanspring.security.auth;
 
+import com.tanvoid0.tanspring.models.comment.Comment;
+import com.tanvoid0.tanspring.models.user.hobby.Hobby;
 import lombok.Data;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -45,4 +48,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Hobby> hobbies = new HashSet<>();
 }

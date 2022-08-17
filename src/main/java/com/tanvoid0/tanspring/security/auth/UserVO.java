@@ -1,9 +1,13 @@
 package com.tanvoid0.tanspring.security.auth;
 
+import com.tanvoid0.tanspring.models.user.hobby.Hobby;
+import com.tanvoid0.tanspring.models.user.hobby.HobbyVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.util.Set;
 
 
 @Data
@@ -30,5 +34,6 @@ public class UserVO {
     private String publicEmail;
     private String cv;
     private String url;
-    private String password;
+    //    private String password;
+    private Set<HobbyVO> hobbies;
 }
