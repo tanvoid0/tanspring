@@ -1,25 +1,28 @@
-package com.tanvoid0.tanspring.models.user.hobby;
+package com.tanvoid0.tanspring.models.user.social;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.tanvoid0.tanspring.common.vo.BaseUVO;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotNull;
 
-@Data
-@SuperBuilder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class HobbyVO {
+@SuperBuilder
+public class SocialVO {
     private long id;
 
     @NotNull
     private String title;
 
-    private String icon;
+    @NotNull
+    private String url;
 
     private String image;
+
+    private String icon;
 
     private Long orderSec;
 }

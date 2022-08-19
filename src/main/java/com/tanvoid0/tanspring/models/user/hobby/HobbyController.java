@@ -52,7 +52,7 @@ public class HobbyController implements CustomController<HobbyVO, NewHobbyVO, Up
 
     @DeleteMapping("/{id}")
     @Override
-    public boolean delete(@PathVariable long id) {
+    public boolean delete(@PathVariable("id") long id) {
         log.info("Delete hobby");
         return service.delete(id);
     }

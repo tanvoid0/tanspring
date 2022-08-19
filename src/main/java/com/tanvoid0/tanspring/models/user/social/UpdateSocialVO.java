@@ -1,4 +1,4 @@
-package com.tanvoid0.tanspring.models.user.hobby;
+package com.tanvoid0.tanspring.models.user.social;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,15 +11,16 @@ import javax.validation.constraints.NotNull;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class HobbyVO {
+public class UpdateSocialVO {
     private long id;
-
+    
     @NotNull
     private String title;
+
+    @NotNull
+    private String url;
 
     private String icon;
 
     private String image;
-
-    private Long orderSec;
 }

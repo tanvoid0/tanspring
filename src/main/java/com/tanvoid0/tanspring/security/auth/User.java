@@ -1,7 +1,7 @@
 package com.tanvoid0.tanspring.security.auth;
 
-import com.tanvoid0.tanspring.models.comment.Comment;
 import com.tanvoid0.tanspring.models.user.hobby.Hobby;
+import com.tanvoid0.tanspring.models.user.social.Social;
 import lombok.Data;
 
 import java.util.HashSet;
@@ -51,4 +51,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Hobby> hobbies = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Social> socials = new HashSet<>();
 }

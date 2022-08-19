@@ -25,9 +25,7 @@ public class HobbyServiceImpl implements HobbyService {
         Hobby entity = mapper.map(newVO, Hobby.class);
         entity.setUser(userService.getAuthUser());
         final Hobby savedEntity = repository.save(entity);
-//        savedEntity.setOrder(savedEntity.getId());
-        final Hobby savedEntityWithOrder = repository.save(savedEntity);
-        return convertEntityToVO(savedEntityWithOrder);
+        return convertEntityToVO(savedEntity);
     }
 
     @Override
@@ -44,7 +42,7 @@ public class HobbyServiceImpl implements HobbyService {
     @Override
     public HobbyVO update(UpdateHobbyVO updateVO) {
         final Hobby entity = findEntity(updateVO.getId());
-        mapper.map(entity, updateVO);
+        mapper.map(updateVO, entity);
         final Hobby savedEntity = repository.save(entity);
         return convertEntityToVO(savedEntity);
     }
