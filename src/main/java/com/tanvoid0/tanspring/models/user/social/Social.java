@@ -1,34 +1,27 @@
-package com.tanvoid0.tanspring.models.todo;
+package com.tanvoid0.tanspring.models.user.social;
 
+import com.tanvoid0.tanspring.security.auth.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.ZonedDateTime;
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Getter
 @Setter
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder(toBuilder = true)
 @Entity
-@Table(name = "todos")
-public class Todo {
+@Table(name = "socials", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"url"})
+})
+public class Social {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -36,17 +29,18 @@ public class Todo {
     @Column(nullable = false)
     private String title;
 
-    @Column
-    private String description;
+    @Column(nullable = false)
+    private String url;
 
-    @Column
+    private String image;
     private String icon;
 
-    @Column
-    private ZonedDateTime deadline;
+    private long version = 0;
+    private Long orderSeq;
 
-    @Column
-    private ZonedDateTime reminder;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
@@ -55,9 +49,11 @@ public class Todo {
 
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Date updatedAt;
 
-    @Column(nullable = false)
-    private long userId;
+    @PostPersist
+    private void postPersist() {
+        this.orderSeq = this.id;
+    }
 }
