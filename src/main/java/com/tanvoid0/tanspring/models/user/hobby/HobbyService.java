@@ -1,15 +1,6 @@
 package com.tanvoid0.tanspring.models.user.hobby;
 
-import java.util.List;
+import com.tanvoid0.tanspring.common.template.CustomService;
 
-public interface HobbyService {
-    HobbyVO add(NewHobbyVO newVO);
-
-    List<HobbyVO> get();
-
-    HobbyVO get(long id);
-
-    HobbyVO update(UpdateHobbyVO updateVO);
-
-    boolean delete(long id);
+public interface HobbyService extends CustomService<Hobby, HobbyVO, NewHobbyVO, UpdateHobbyVO> {
 }

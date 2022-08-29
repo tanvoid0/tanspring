@@ -1,13 +1,12 @@
-package com.tanvoid0.tanspring.security.auth;
+package com.tanvoid0.tanspring.models.user;
 
 import com.tanvoid0.tanspring.common.exception.AuthException;
 import com.tanvoid0.tanspring.common.exception.ResourceNotFoundException;
 import com.tanvoid0.tanspring.common.vo.JWTAuthResponseVO;
+import com.tanvoid0.tanspring.security.auth.*;
 import com.tanvoid0.tanspring.security.jwt.JwtTokenProvider;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -119,9 +118,13 @@ public class UserServiceImpl implements UserService {
         return this.getAuthUser().getId();
     }
 
+
     @Override
     public User getAuthUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null) {
+            return null;
+        }
         String username = auth.getName();
         return repository.findByUsernameOrEmail(username, username).orElseThrow(() -> new ResourceNotFoundException("user", "usernameOrEmail", username));
     }

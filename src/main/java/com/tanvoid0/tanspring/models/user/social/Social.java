@@ -1,6 +1,6 @@
 package com.tanvoid0.tanspring.models.user.social;
 
-import com.tanvoid0.tanspring.security.auth.User;
+import com.tanvoid0.tanspring.models.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "socials", uniqueConstraints = {
+@Table(name = "user_socials", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"url"})
 })
 public class Social {

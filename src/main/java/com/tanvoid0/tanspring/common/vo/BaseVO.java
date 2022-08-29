@@ -5,9 +5,8 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
-@Getter
-@Setter
-@SuperBuilder
+@Data
+@SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class BaseVO {

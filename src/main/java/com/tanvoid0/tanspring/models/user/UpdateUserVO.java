@@ -1,21 +1,19 @@
-package com.tanvoid0.tanspring.security.auth;
+package com.tanvoid0.tanspring.models.user;
 
-import com.tanvoid0.tanspring.models.user.hobby.Hobby;
-import com.tanvoid0.tanspring.models.user.hobby.HobbyVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Set;
-
+import javax.validation.constraints.NotNull;
 
 @Data
-@SuperBuilder(toBuilder = true)
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserVO {
+public class UpdateUserVO {
     private long id;
+
     private String name;
     private String fullName;
     private String phone;
@@ -29,11 +27,17 @@ public class UserVO {
     private String whatIDo;
     private String about;
     private String aboutDetailed;
+
+    @NotNull
     private String username;
+
+    @NotNull
     private String email;
+
     private String publicEmail;
     private String cv;
     private String url;
-    //    private String password;
-    private Set<HobbyVO> hobbies;
+
+    @NotNull
+    private String password;
 }

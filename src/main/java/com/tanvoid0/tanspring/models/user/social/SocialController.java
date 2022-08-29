@@ -12,43 +12,48 @@ import java.util.List;
 @RequestMapping("/api/v1/social")
 @Slf4j
 public class SocialController implements CustomController<SocialVO, NewSocialVO, UpdateSocialVO> {
-    private final SocialService service;
+  private final SocialService service;
 
-    public SocialController(SocialService service) {
-        this.service = service;
-    }
+  public SocialController(SocialService service) {
+    this.service = service;
+  }
 
-    @GetMapping
-    @Override
-    public List<SocialVO> get() {
-        return service.get();
-    }
+  @GetMapping
+  @Override
+  public List<SocialVO> get() {
+    return service.get();
+  }
 
-    @GetMapping("/{id}")
-    @Override
-    public SocialVO get(final @PathVariable("id") long id) {
-        return service.get(id);
-    }
+  @GetMapping("/{id}")
+  @Override
+  public SocialVO get(final @PathVariable("id") long id) {
+    return service.get(id);
+  }
 
-    @PostMapping
-    @PreAuthorize("hasRole('USER')")
-    @Override
-    public SocialVO add(@Valid @RequestBody final NewSocialVO newSocialVO) {
-        return service.add(newSocialVO);
-    }
+  @PostMapping
+  @PreAuthorize("hasRole('USER')")
+  @Override
+  public SocialVO add(@Valid @RequestBody final NewSocialVO newSocialVO) {
+    return service.add(newSocialVO);
+  }
 
-    @PutMapping("/{id}")
-    @PreAuthorize("hasRole('USER')")
-    @Override
-    public SocialVO update(@PathVariable("id") final long id, @Valid @RequestBody UpdateSocialVO updateSocialVO) {
-        updateSocialVO.setId(id);
-        return service.update(updateSocialVO);
-    }
+  @Override
+  public List<SocialVO> add(List<NewSocialVO> newSocialVOS) {
+    return newSocialVOS.stream().map(this::add).toList();
+  }
 
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('USER')")
-    @Override
-    public boolean delete(@PathVariable("id") long id) {
-        return service.delete(id);
-    }
+  @PutMapping("/{id}")
+  @PreAuthorize("hasRole('USER')")
+  @Override
+  public SocialVO update(@PathVariable("id") final long id, @Valid @RequestBody UpdateSocialVO updateSocialVO) {
+    updateSocialVO.setId(id);
+    return service.update(updateSocialVO);
+  }
+
+  @DeleteMapping("/{id}")
+  @PreAuthorize("hasRole('USER')")
+  @Override
+  public boolean delete(@PathVariable("id") long id) {
+    return service.delete(id);
+  }
 }
