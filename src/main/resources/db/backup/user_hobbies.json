@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "icon": "0xf02d",
+    "image": null,
+    "order_sec": 1,
+    "title": "Cycling",
+    "user_id": 1
+  },
+  {
+    "id": 2,
+    "icon": "0xf072",
+    "image": null,
+    "order_sec": 2,
+    "title": "Travelling",
+    "user_id": 1
+  },
+  {
+    "id": 3,
+    "icon": "0xf02d",
+    "image": null,
+    "order_sec": 3,
+    "title": "Reading",
+    "user_id": 1
+  },
+  {
+    "id": 4,
+    "icon": "0xf544",
+    "image": null,
+    "order_sec": 4,
+    "title": "Automation",
+    "user_id": 1
+  },
+  {
+    "id": 5,
+    "icon": "0xf11b",
+    "image": null,
+    "order_sec": 5,
+    "title": "Gaming",
+    "user_id": 1
+  },
+  {
+    "id": 6,
+    "icon": "0xf121",
+    "image": null,
+    "order_sec": 6,
+    "title": "Coding",
+    "user_id": 1
+  }
+]
