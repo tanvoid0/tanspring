@@ -28,26 +28,25 @@ import java.util.Set;
 @Table(name = "user_career")
 public class Career extends BaseEntity implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = 4294294701060916909L;
+  @Serial
+  private static final long serialVersionUID = 4294294701060916909L;
 
-    @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Academic> academics = new HashSet<>();
+  @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Academic> academics = new HashSet<>();
 
-    @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Achievement> achievements = new HashSet<>();
+  @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Achievement> achievements = new HashSet<>();
 
-    @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Certificate> certificates = new HashSet<>();
+  @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Certificate> certificates = new HashSet<>();
 
-    @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Experience> experiences = new HashSet<>();
+  @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Experience> experiences = new HashSet<>();
 
-    @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Volunteer> volunteers = new HashSet<>();
+  @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Volunteer> volunteers = new HashSet<>();
 
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
 }
