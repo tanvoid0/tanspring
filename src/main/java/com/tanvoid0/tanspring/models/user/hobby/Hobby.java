@@ -1,7 +1,6 @@
 package com.tanvoid0.tanspring.models.user.hobby;
 
-import com.tanvoid0.tanspring.models.post.Post;
-import com.tanvoid0.tanspring.security.auth.User;
+import com.tanvoid0.tanspring.models.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "hobbies", uniqueConstraints = {
+@Table(name = "user_hobbies", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"title"})
 })
 public class Hobby {

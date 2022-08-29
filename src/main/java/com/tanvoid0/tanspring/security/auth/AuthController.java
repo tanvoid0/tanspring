@@ -1,29 +1,21 @@
 package com.tanvoid0.tanspring.security.auth;
 
-import com.tanvoid0.tanspring.common.exception.AuthException;
-import com.tanvoid0.tanspring.security.jwt.JwtUtil;
+import com.tanvoid0.tanspring.models.user.UpdateUserVO;
+import com.tanvoid0.tanspring.models.user.UserService;
+import com.tanvoid0.tanspring.models.user.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import com.tanvoid0.tanspring.common.vo.JWTAuthResponseVO;
-import com.tanvoid0.tanspring.security.jwt.JwtTokenProvider;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 
 @Api(value = "Auth controller exposes signin and signup REST APIs")

@@ -1,13 +1,16 @@
-package com.tanvoid0.tanspring.security.auth;
+package com.tanvoid0.tanspring.models.user;
+
+//import com.tanvoid0.tanspring.models.user.career.Career;
 
 import com.tanvoid0.tanspring.models.user.hobby.Hobby;
+import com.tanvoid0.tanspring.models.user.portfolio.Portfolio;
 import com.tanvoid0.tanspring.models.user.social.Social;
+import com.tanvoid0.tanspring.security.auth.Role;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.*;
 
 @Data
 @Entity
@@ -54,4 +57,11 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Social> socials = new HashSet<>();
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Portfolio portfolio;
+
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Career career;
+
 }

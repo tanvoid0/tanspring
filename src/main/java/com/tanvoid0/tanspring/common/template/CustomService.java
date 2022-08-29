@@ -4,19 +4,21 @@ import java.util.List;
 
 public interface CustomService<Entity, VO, NewVO, UpdateVO> {
 
-    List<VO> get();
+  List<VO> get();
 
-    VO get(long id);
+  VO get(long id);
 
-    VO add(NewVO newVO);
+  VO add(NewVO newVO);
 
-    VO update(UpdateVO updateVO);
+  List<VO> add(List<NewVO> newVOList);
 
-    boolean delete(long id);
+  VO update(UpdateVO updateVO);
 
-    Entity findEntity(long id);
+  boolean delete(long id);
 
-    VO convertEntityToVO(Entity entity);
+  Entity findEntity(long id);
 
-    Entity convertVOToEntity(VO vo);
+  VO convertEntityToVO(Entity entity);
+
+  Entity convertVOToEntity(VO vo);
 }
