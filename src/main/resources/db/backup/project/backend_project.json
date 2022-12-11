@@ -1,0 +1,31 @@
+[
+  {
+    "title": "NodePI",
+    "description": "NodeJS API with ExpressJS implementation",
+    "source": "https://github.com/tanvoid0/node-pi"
+  },
+  {
+    "title": "ts-PI",
+    "description": "A NodeJS API built with Typescript",
+    "source": "https://github.com/tanvoid0/ts-api"
+  },
+  {
+    "title": "FastPI",
+    "description": "Fast API",
+    "source": "https://github.com/tanvoid0/fastpi",
+    "status": "RELEASED"
+  },
+  {
+    "title": "Djangpi",
+    "description": "Django API",
+    "source": "https://github.com/tanvoid0/djangpi"
+  },
+  {
+    "title": "LaraPI",
+    "description": "Laravel API"
+  }
+]
+
+
+
+

@@ -7,17 +7,25 @@ import com.tanvoid0.tanspring.models.user.career.achievement.Achievement;
 import com.tanvoid0.tanspring.models.user.career.certificate.Certificate;
 import com.tanvoid0.tanspring.models.user.career.experience.Experience;
 import com.tanvoid0.tanspring.models.user.career.volunteer.Volunteer;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Getter
 @Setter

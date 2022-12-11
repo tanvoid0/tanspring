@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Genect",
+    "description": "A Machine Learning based algorithm implemented to Predict gender based on person names.",
+    "source": "https://github.com/tanvoid0/Genect",
+    "tags": [
+      {
+        "title": "Machine Learning"
+      },
+      {
+        "title": "Python"
+      }
+    ]
+  },
+  {
+    "title": "Women Empowerment Project",
+    "description": "A Machine Learning project based on Women empowerment survey",
+    "source": "https://github.com/tanvoid0/women-empowerment-classification"
+  }
+]

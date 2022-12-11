@@ -1,5 +1,7 @@
 package com.tanvoid0.tanspring.models.user.career.organization;
 
+import com.tanvoid0.tanspring.common.vo.BaseVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,18 +25,14 @@ import javax.validation.constraints.NotNull;
 //        @Type(value = ExperienceVO.class, name = Experience.NAME),
 //        @Type(value = VolunteerVO.class, name = Volunteer.NAME)
 //})
-public class OrganizationVO {
-
-    private long id;
-
-    @NotNull
-    private String title;
-
-    private String image;
-    private String logo;
-    private String institution;
-    private String address;
-    private String timeline;
-    private String description;
-    private String activities;
+public class OrganizationVO extends BaseVO {
+  @NotNull
+  private String title;
+  private String image;
+  private String logo;
+  private String institution;
+  private String address;
+  private String timeline;
+  private String description;
+  private String activities;
 }

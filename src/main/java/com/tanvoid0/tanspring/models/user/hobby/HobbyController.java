@@ -1,12 +1,22 @@
 package com.tanvoid0.tanspring.models.user.hobby;
 
 import com.tanvoid0.tanspring.common.template.CustomController;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/hobby")
@@ -41,6 +51,8 @@ public class HobbyController implements CustomController<HobbyVO, NewHobbyVO, Up
     return service.add(newVO);
   }
 
+  @PostMapping("/batch")
+  @PreAuthorize("hasRole('USER')")
   @Override
   public List<HobbyVO> add(@Valid @RequestBody final List<NewHobbyVO> newHobbyVOS) {
     return service.add(newHobbyVOS);
@@ -51,6 +63,7 @@ public class HobbyController implements CustomController<HobbyVO, NewHobbyVO, Up
   @Override
   public HobbyVO update(@PathVariable final long id, @Valid @RequestBody final UpdateHobbyVO updateVO) {
     log.info("Update hobby");
+    updateVO.setId(id);
     return service.update(updateVO);
   }
 

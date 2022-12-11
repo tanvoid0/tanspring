@@ -1,12 +1,22 @@
 package com.tanvoid0.tanspring.models.user.social;
 
 import com.tanvoid0.tanspring.common.template.CustomController;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/social")
@@ -37,9 +47,11 @@ public class SocialController implements CustomController<SocialVO, NewSocialVO,
     return service.add(newSocialVO);
   }
 
+  @PostMapping("/batch")
+  @PreAuthorize("hasRole('USER')")
   @Override
-  public List<SocialVO> add(List<NewSocialVO> newSocialVOS) {
-    return newSocialVOS.stream().map(this::add).toList();
+  public List<SocialVO> add(@Valid @RequestBody final List<NewSocialVO> newSocialVOS) {
+    return service.add(newSocialVOS);
   }
 
   @PutMapping("/{id}")

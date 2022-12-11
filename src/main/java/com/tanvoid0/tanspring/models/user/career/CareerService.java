@@ -4,7 +4,12 @@ import com.tanvoid0.tanspring.common.template.CustomService;
 import com.tanvoid0.tanspring.models.user.User;
 
 public interface CareerService extends CustomService<Career, CareerVO, NewCareerVO, UpdateCareerVO> {
-    Career findOrCreateByUser();
 
-    Career findOrCreateByUser(User user);
+  CareerVO getCareer();
+
+  Career findOrCreateByUser();
+
+  Career findOrCreateByUser(User user);
+
+  CareerVO getByUsername(String username);
 }

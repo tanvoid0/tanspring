@@ -7,23 +7,29 @@ import com.tanvoid0.tanspring.security.auth.NewUserVO;
 import java.util.List;
 
 public interface UserService {
-    List<UserVO> getAll();
+  List<UserVO> getAll();
 
-    UserVO get(long id);
+  UserVO get(long id);
 
-    UserVO create(NewUserVO newVO);
+  UserVO get(String username);
 
-    UserVO update(UpdateUserVO updateVO);
+  UserVO getPortfolio(String username);
 
-    boolean delete(long id);
 
-    UserVO register(NewUserVO newVO);
+  UserVO create(NewUserVO newVO);
 
-    JWTAuthResponseVO login(LoginUserVO loginVO);
+  UserVO update(UpdateUserVO updateVO);
 
-    long getAuthUserId();
+  boolean delete(long id);
 
-    User getAuthUser();
+  UserVO register(NewUserVO newVO);
 
-    UserVO getAuthUserVO();
+  JWTAuthResponseVO login(LoginUserVO loginVO);
+
+  long getAuthUserId();
+
+  User getAuthUser();
+
+  UserVO getAuthUserVO();
+
 }

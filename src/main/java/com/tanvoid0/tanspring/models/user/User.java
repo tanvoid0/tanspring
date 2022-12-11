@@ -2,17 +2,30 @@ package com.tanvoid0.tanspring.models.user;
 
 //import com.tanvoid0.tanspring.models.user.career.Career;
 
+import com.tanvoid0.tanspring.common.vo.BaseEntity;
 import com.tanvoid0.tanspring.models.user.career.Career;
 import com.tanvoid0.tanspring.models.user.hobby.Hobby;
 import com.tanvoid0.tanspring.models.user.portfolio.Portfolio;
-import com.tanvoid0.tanspring.models.user.skill.entity.Skill;
+import com.tanvoid0.tanspring.models.user.skill.entity.SkillEntity;
 import com.tanvoid0.tanspring.models.user.social.Social;
 import com.tanvoid0.tanspring.security.auth.Role;
+
 import lombok.Data;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Data
 @Entity
@@ -21,11 +34,7 @@ import java.util.Set;
     @UniqueConstraint(columnNames = {"email"}),
     @UniqueConstraint(columnNames = {"phone"})
 })
-public class User {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+public class User extends BaseEntity {
   private String name;
   private String fullName;
   private String phone;
@@ -52,7 +61,7 @@ public class User {
   @JoinTable(name = "user_roles",
       joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-  private Set<Role> roles;
+  private Set<Role> roles = new HashSet<>();
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Hobby> hobbies = new HashSet<>();
@@ -67,6 +76,6 @@ public class User {
   private Career career;
 
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Skill skill;
+  private SkillEntity skill;
 
 }

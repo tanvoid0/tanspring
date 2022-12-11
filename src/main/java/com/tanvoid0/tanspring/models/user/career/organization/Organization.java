@@ -1,16 +1,21 @@
 package com.tanvoid0.tanspring.models.user.career.organization;
 
 import com.tanvoid0.tanspring.common.vo.BaseEntity;
-import com.tanvoid0.tanspring.models.user.career.Career;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 @Getter
 @Setter
@@ -44,9 +49,5 @@ public abstract class Organization extends BaseEntity implements Serializable {
 
   @Column(length = 3000)
   private String activities;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "career_id", nullable = false)
-  private Career career;
 
 }

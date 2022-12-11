@@ -5,7 +5,9 @@ import com.tanvoid0.tanspring.models.user.UserService;
 import com.tanvoid0.tanspring.models.user.career.Career;
 import com.tanvoid0.tanspring.models.user.career.CareerService;
 import com.tanvoid0.tanspring.models.user.career.academic.Academic;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +49,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     final Career career = careerService.findOrCreateByUser(user);
     log.info("User {}, with id: {} ", user, user.getId());
     Organization entity = mapper.map(newOrganizationVO, Organization.class);
-    entity.setCareer(career);
+//    entity.setCareer(career);
     final Organization savedEntity = repository.save(entity);
     return convertEntityToVO(savedEntity);
   }

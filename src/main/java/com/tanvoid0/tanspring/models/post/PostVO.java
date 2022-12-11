@@ -1,15 +1,17 @@
 package com.tanvoid0.tanspring.models.post;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-
 import com.tanvoid0.tanspring.models.comment.CommentVO;
 
+import lombok.Data;
+
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description = "Post model information")
 @Data
@@ -38,5 +40,5 @@ public class PostVO {
   private String content;
 
   @ApiModelProperty(value = "Blog post comments")
-  private Set<CommentVO> comments;
+  private Set<CommentVO> comments = new HashSet<>();
 }
