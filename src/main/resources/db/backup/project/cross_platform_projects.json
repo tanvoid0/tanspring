@@ -1,0 +1,53 @@
+[
+  {
+    "title": "Whatsapp clone",
+    "description": "A whatsapp clone application built in React Native",
+    "source": "https://github.com/tanvoid0/WhatsappClone"
+  },
+  {
+    "title": "Rota-man",
+    "description": "A Rota Management application",
+    "status": "TERMINATED",
+    "source": "https://github.com/tanvoid0/rota-man"
+  },
+  {
+    "title": "Gamestop",
+    "description": "A Game rating Application developed as part of Mobile Development Course for Masters",
+    "status": "RELEASED",
+    "source": "https://github.com/tanvoid0/gamestop-flutter",
+    "_comment": "//TODO: Look at this source code too.. // https://github.com/tanvoid0/gamestop"
+  },
+  {
+    "title": "Travel Buddy",
+    "source": "https://github.com/tanvoid0/travel_buddy",
+    "description": "A Travelling UI App built with Flutter"
+  },
+  {
+    "title": "clUi",
+    "description": "A CLI UI based on repetitive day to day cli tasks",
+    "source": "https://github.com/tanvoid0/clui"
+  },
+  {
+    "title": "Daery",
+    "description": "A daery application that represents collection of your favorite things and things you want to do in future.",
+    "source": "https://github.com/tanvoid0/daery"
+  },
+  {
+    "title": "Gameflix",
+    "description": "A Game rating Application solved as part of Masters coursework"
+  },
+  {
+    "title": "Movieflix App",
+    "description": "A Movie Rating UI Application developed in flutter",
+    "source": "https://github.com/tanvoid0/movieflix"
+  },
+  {
+    "title": "Movieflix App 2",
+    "description": "A Movie Rating UI Application developed in flutter",
+    "source": "https://github.com/tanvoid0/movieflix2"
+  },
+  {
+    "title": "Admin Dashboard",
+    "description": "A clean admin dashboard built with flutter"
+  }
+]

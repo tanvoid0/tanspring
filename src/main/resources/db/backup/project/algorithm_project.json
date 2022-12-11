@@ -1,0 +1,40 @@
+[
+  {
+    "title": "Algorithm",
+    "description": "A collection of all the solutions to the Online Judge problems I've solved",
+    "source": "https://github.com/tanvoid0/Algorithm"
+  },
+  {
+    "title": "Solution to URI in Python",
+    "source": "https://github.com/tanvoid0/URI"
+  },
+  {
+    "title": "Problem Solving",
+    "description": "A more organized version of Algorithm, trying to follow a few books",
+    "source": "https://github.com/tanvoid0/Problem-Solving"
+  },
+  {
+    "title": "Particle Collision Detection and Response Algorithm",
+    "description": "Particle Detection and Response Algorithm Designed as part of Masters course for OOP with Data Structures and Algorithms",
+    "_comment": "// TODO: https://drive.google.com/drive/folders/1MuKOYGYa6_zvAU86SPkZ2XAsp3bnH8Pw",
+    "tags": [
+      {
+        "title": "Algorithms"
+      },
+      {
+        "title": "Data Structures"
+      },
+      {
+        "title": "c++"
+      },
+      {
+        "title": "opengl"
+      }
+    ]
+  },
+  {
+    "title": "Simulation",
+    "description": "A Simulation web app developed in javascript as part of coursework for simulation",
+    "source": "https://github.com/tanvoid0/Simulation-Web-App"
+  }
+]

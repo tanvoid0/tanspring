@@ -1,5 +1,7 @@
 package com.tanvoid0.tanspring.models.user.hobby;
 
+import com.tanvoid0.tanspring.common.vo.BaseVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,15 +13,15 @@ import javax.validation.constraints.NotNull;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class HobbyVO {
-    private long id;
+public class HobbyVO extends BaseVO {
+  private long id;
 
-    @NotNull
-    private String title;
+  @NotNull
+  private String title;
 
-    private String icon;
+  private String icon;
 
-    private String image;
+  private String image;
 
-    private Long orderSec;
+  private Long orderSec;
 }

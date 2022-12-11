@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Coolpad",
+    "source": "https://github.com/tanvoid0/Coolpad",
+    "description": "This is not a showcase project, rather a simple conceptual project developed in the beginning of academic programming and one of the first GUI Applications I've developed. As the name suggests, it's a notepad with cool features (if you consider early coding days ;) } So this project includes a notepad, that helps to encrypt text using traditional character shifting. and does basic save edit, and of course comes with a total notepad vibe.",
+    "tags": [
+      {
+        "title": "Swing"
+      },
+      {
+        "title": "Java"
+      },
+      {
+        "title": "Encryption"
+      },
+      {
+        "title": "Hobby"
+      }
+    ]
+  },
+  {
+    "title": "Resistor Calculator",
+    "description": "A fun project done to ease the Physics Lab resistor count as part of Bachelors course",
+    "source": "https://github.com/tanvoid0/Resistor-Calculator"
+  },
+  {
+    "title": "Resistor Calculator Android",
+    "description": "A fun project done to ease the Physics Lab resistor count as part of Bachelors course",
+    "source": "https://github.com/tanvoid0/Resistor-Calculator-App"
+  },
+  {
+    "title": "Password Manager",
+    "description": "A password manager project built in .NET Core. It's a basic application I built to play with .NET Core framework. Again, basic character shifting algorithms implemented.",
+    "source": "https://github.com/tanvoid0/enigma-prime-web-app",
+    "_comment": "/// Extension https://github.com/tanvoid0/enigma",
+    "tags": [
+      {
+        "title": "Encryption"
+      },
+      {
+        "title": ".net"
+      }
+    ]
+  },
+  {
+    "title": "CGPA Calculator",
+    "description": "A simple CGPA Calculator for Hobby",
+    "source": "https://github.com/tanvoid0/diu-cse-cgpa"
+  },
+  {
+    "title": "Smart Calculator",
+    "description": "A voice activated calculator",
+    "source": ""
+  },
+  {
+    "title": "Power timer",
+    "description": "A windows application to manipulate windows Power using powershell commands embedded into .NET Desktop",
+    "source": "https://github.com/tanvoid0/Power-Timer"
+  },
+  {
+    "title": "Dashboard Application",
+    "source": "https://github.com/tanvoid0/portfolio-dashboard"
+  },
+  {
+    "title": "Chat App",
+    "tags": [
+      {
+        "title": "NodeJS"
+      },
+      {
+        "title": "NodeJS"
+      },
+      {
+        "title": "Chat App"
+      }
+    ],
+    "description": "A socket IO based Basic Chat application. Developed to learn SocketIO implementation with NodeJS."
+  },
+  {
+    "title": "Birthday Surprise",
+    "tags": [
+      {
+        "title": "Hobby"
+      },
+      {
+        "title": "Javascript"
+      }
+    ],
+    "description": "A jquery based simple application, built to wish friends and family on their birthday",
+    "source": "https://github.com/tanvoid0/birthday"
+  }
+]

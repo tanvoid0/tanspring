@@ -2,15 +2,22 @@ package com.tanvoid0.tanspring.models.user.career.certificate;
 
 import com.tanvoid0.tanspring.models.user.career.Career;
 import com.tanvoid0.tanspring.models.user.career.organization.Organization;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PostPersist;
+import javax.persistence.Table;
 
 @Getter
 @Setter
@@ -20,7 +27,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "career_certificate")
 public class Certificate extends Organization implements Serializable {
-
   public static final String NAME = "Certificate";
 
   @Serial
@@ -33,6 +39,10 @@ public class Certificate extends Organization implements Serializable {
   private String certificate;
 
   private Long orderSeq;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "career_id", nullable = false)
+  private Career career;
 
   @PostPersist
   private void postPersist() {

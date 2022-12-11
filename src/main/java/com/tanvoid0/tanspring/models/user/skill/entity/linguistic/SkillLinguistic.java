@@ -1,16 +1,22 @@
-package com.tanvoid0.tanspring.models.user.skill.entity.hard.linguistic;
+package com.tanvoid0.tanspring.models.user.skill.entity.linguistic;
 
 import com.tanvoid0.tanspring.models.user.skill.entity.BaseSkill;
-import com.tanvoid0.tanspring.models.user.skill.entity.Skill;
+import com.tanvoid0.tanspring.models.user.skill.entity.SkillEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Getter
 @Setter
@@ -20,10 +26,10 @@ import java.io.Serializable;
 @Entity
 @Table(name = "skill_linguistic")
 public class SkillLinguistic extends BaseSkill implements Serializable {
-  @Serial
-  private static final long serialVersionUID = 129196144989335725L;
 
+  @Serial
+  private static final long serialVersionUID = -5690787869821282001L;
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "skill_id", nullable = false)
-  private Skill skill;
+  private SkillEntity skill;
 }

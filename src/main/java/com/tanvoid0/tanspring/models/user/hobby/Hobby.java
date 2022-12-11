@@ -1,6 +1,8 @@
 package com.tanvoid0.tanspring.models.user.hobby;
 
+import com.tanvoid0.tanspring.common.vo.BaseEntity;
 import com.tanvoid0.tanspring.models.user.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,28 +18,24 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "user_hobbies", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"title"})
+    @UniqueConstraint(columnNames = {"title"})
 })
-public class Hobby {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class Hobby extends BaseEntity {
+  @Column(nullable = false)
+  private String title;
 
-    @Column(nullable = false)
-    private String title;
+  private String icon;
 
-    private String icon;
+  private String image;
 
-    private String image;
+  private Long orderSec;
 
-    private Long orderSec;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @PostPersist
-    private void postPersist() {
-        this.orderSec = this.id;
-    }
+  @PostPersist
+  private void postPersist() {
+    this.orderSec = this.id;
+  }
 }

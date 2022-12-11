@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Sotej",
+    "description": "A survey Application, developed to take survey for a business camp we had held as part of Hult 2019 Mumbai",
+    "source": "https://github.com/tanvoid0/Sotej"
+  },
+  {
+    "title": "Not sure what for",
+    "source": "https://github.com/tanvoid0/Calc",
+    "_comment": "// https://github.com/tanvoid0/SmartCal"
+  },
+  {
+    "title": "Unknown",
+    "source": "https://github.com/tanvoid0/Droid-Calc"
+  },
+  {
+    "title": "TicTacToe Game",
+    "source": "https://github.com/tanvoid0/TicTacToe"
+  },
+  {
+    "title": "Classroom Application",
+    "source": "https://github.com/tanvoid0/Classroom-App"
+  },
+  {
+    "title": "Keylogger",
+    "description": "A Simple Keylogger using Python Scripts"
+  },
+  {
+    "title": "Mailbomb",
+    "description": "A mailbombing application built as part of cyber security testing",
+    "_comment": "// TODO: find source, for both desktop and python script",
+    "_comment2": "// TODO: Some investigation on\n  // https://github.com/najmoon/Inventory"
+  }
+]
