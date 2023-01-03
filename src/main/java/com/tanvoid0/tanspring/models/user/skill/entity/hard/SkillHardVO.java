@@ -17,5 +17,5 @@ import java.util.Set;
 public class SkillHardVO extends BaseVO {
   private String name;
   private Set<SkillItemVO> items = new HashSet<>();
-  private Long orderSec;
+  private Long orderSeq;
 }

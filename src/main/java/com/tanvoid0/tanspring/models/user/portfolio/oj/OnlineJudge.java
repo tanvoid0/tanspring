@@ -51,10 +51,10 @@ public class OnlineJudge extends BaseEntity implements Serializable {
   @JoinColumn(name = "portfolio_id", nullable = false)
   private Portfolio portfolio;
 
-  private Long orderSec;
+  private Long orderSeq;
 
   @PostPersist
   private void postPersist() {
-    this.orderSec = this.id;
+    this.orderSeq = this.id;
   }
 }

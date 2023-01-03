@@ -18,12 +18,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -49,15 +44,19 @@ public class SkillEntity extends BaseEntity implements Serializable {
 //  private Set<SkillSoftware> software;
 
   @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OrderBy("orderSeq ASC")
   private Set<SkillFramework> frameworks = new HashSet<>();
 
   @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OrderBy("orderSeq ASC")
   private Set<SkillHard> hardSkills = new HashSet<>();
 
   @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OrderBy("orderSeq ASC")
   private Set<SkillSoft> softSkills = new HashSet<>();
 
   @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OrderBy("orderSeq ASC")
   private Set<SkillLinguistic> linguisticSkills = new HashSet<>();
 
   @OneToOne(fetch = FetchType.LAZY)

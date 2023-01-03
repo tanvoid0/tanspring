@@ -1,5 +1,6 @@
 package com.tanvoid0.tanspring.models.user.skill.entity.hard;
 
+import com.tanvoid0.tanspring.models.user.skill.entity.BaseSkillVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,16 +13,9 @@ import java.io.Serializable;
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class SkillItemVO implements Serializable {
+public class SkillItemVO extends BaseSkillVO implements Serializable {
 
   @Serial
   private static final long serialVersionUID = -4982497023585950056L;
-  private String name;
-  private String category;
-  private String icon;
-  private String image;
-  private String fluency;
-  private float fluencyVal;
-  private String description;
-  private Long orderSec;
+  private Long orderSeq;
 }

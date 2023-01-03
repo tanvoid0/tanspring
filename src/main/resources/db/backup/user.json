@@ -9,7 +9,7 @@
         "icon": null,
         "progress": "286+ Points",
         "url": "https://www.freecodecamp.org/tanvoid0",
-        "orderSec": 4
+        "orderSeq": 4
       },
       {
         "version": 1,
@@ -19,7 +19,7 @@
         "icon": null,
         "progress": "180+ Solved",
         "url": "https://www.beecrowd.com.br/judge/en/profile/110031",
-        "orderSec": 2
+        "orderSeq": 2
       },
       {
         "version": 1,
@@ -29,7 +29,7 @@
         "icon": null,
         "progress": "6200+ HackOS",
         "url": "https://www.hackerrank.com/thaque20",
-        "orderSec": 1
+        "orderSeq": 1
       },
       {
         "version": 1,
@@ -39,7 +39,7 @@
         "icon": null,
         "progress": "300+ Rating",
         "url": "https://acm.timus.ru/author.aspx?id=211478",
-        "orderSec": 5
+        "orderSeq": 5
       },
       {
         "version": 1,
@@ -49,7 +49,7 @@
         "icon": null,
         "progress": "19+ Problem Solved",
         "url": "https://leetcode.com/thaque20/",
-        "orderSec": 3
+        "orderSeq": 3
       },
       {
         "version": 1,
@@ -59,7 +59,7 @@
         "icon": null,
         "progress": "74+ WPM",
         "url": "https://thetypingcat.com/user/83040",
-        "orderSec": 6
+        "orderSeq": 6
       }
     ],
     "projects": [

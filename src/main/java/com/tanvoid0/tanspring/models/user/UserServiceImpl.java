@@ -3,6 +3,8 @@ package com.tanvoid0.tanspring.models.user;
 import com.tanvoid0.tanspring.common.exception.AuthException;
 import com.tanvoid0.tanspring.common.exception.ResourceNotFoundException;
 import com.tanvoid0.tanspring.common.vo.JWTAuthResponseVO;
+import com.tanvoid0.tanspring.models.user.career.academic.Academic;
+import com.tanvoid0.tanspring.models.user.career.academic.AcademicVO;
 import com.tanvoid0.tanspring.models.user.skill.entity.hard.framework.language.SkillLanguage;
 import com.tanvoid0.tanspring.models.user.skill.entity.hard.framework.language.SkillLanguageRepository;
 import com.tanvoid0.tanspring.models.user.skill.entity.hard.framework.language.SkillLanguageVO;
@@ -22,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service("userService")
@@ -63,7 +66,14 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserVO get(String username) {
     final User user = repository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
-    return convertEntityToVo(user);
+    final UserVO userVO = convertEntityToVo(user);
+//    userVO.getCareer().getAcademics().sort(new Comparator<AcademicVO>() {
+//      public int compare(AcademicVO s1, AcademicVO s2) {
+//        return s2.getGraduation().compareToIgnoreCase(s1.getGraduation());
+//      }
+//    });
+
+    return userVO;
   }
 
   @Override

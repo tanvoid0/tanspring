@@ -26,5 +26,5 @@ public class SocialVO extends BaseVO {
 
   private String icon;
 
-  private Long orderSec;
+  private Long orderSeq;
 }

@@ -23,5 +23,5 @@ public class HobbyVO extends BaseVO {
 
   private String image;
 
-  private Long orderSec;
+  private Long orderSeq;
 }

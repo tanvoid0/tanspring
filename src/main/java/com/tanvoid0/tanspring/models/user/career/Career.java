@@ -19,13 +19,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -40,18 +34,23 @@ public class Career extends BaseEntity implements Serializable {
   private static final long serialVersionUID = 4294294701060916909L;
 
   @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OrderBy("orderSeq ASC")
   private Set<Academic> academics = new HashSet<>();
 
   @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OrderBy("orderSeq ASC")
   private Set<Achievement> achievements = new HashSet<>();
 
   @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OrderBy("orderSeq ASC")
   private Set<Certificate> certificates = new HashSet<>();
 
   @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OrderBy("orderSeq ASC")
   private Set<Experience> experiences = new HashSet<>();
 
   @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OrderBy("orderSeq ASC")
   private Set<Volunteer> volunteers = new HashSet<>();
 
   @OneToOne(fetch = FetchType.LAZY)

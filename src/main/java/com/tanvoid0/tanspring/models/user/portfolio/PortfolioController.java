@@ -80,4 +80,10 @@ public class PortfolioController {
   public List<ProjectVO> getProject() {
     return service.getProject();
   }
+
+  @GetMapping("/oj")
+  @PreAuthorize("hasRole('USER')")
+  public List<OnlineJudgeVO> getOnlineJudge() {
+    return service.getOnlineJudge();
+  }
 }

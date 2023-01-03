@@ -16,7 +16,8 @@ import lombok.experimental.SuperBuilder;
 public class OnlineJudgeVO extends BaseVO {
   private String name;
   private String icon;
+  private String image;
   private String progress;
   private String url;
-  private Long orderSec;
+  private Long orderSeq;
 }

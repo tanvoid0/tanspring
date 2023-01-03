@@ -9,10 +9,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewOnlineJudgeVO {
-  private String name;
-  private String icon;
-  private String image;
-  private String progress;
-  private String url;
+public class UpdateOnlineJudgeVO {
+    private String name;
+    private String icon;
+    private String image;
+    private String progress;
+    private String url;
 }

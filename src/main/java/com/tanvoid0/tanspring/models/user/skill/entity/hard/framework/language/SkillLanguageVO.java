@@ -27,5 +27,5 @@ public class SkillLanguageVO extends BaseVO implements Serializable {
   private String fluency;
   private float fluencyVal;
   private String description;
-  private Long orderSec;
+  private Long orderSeq;
 }
