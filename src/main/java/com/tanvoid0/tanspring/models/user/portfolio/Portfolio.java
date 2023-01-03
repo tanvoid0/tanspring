@@ -15,13 +15,7 @@ import java.io.Serial;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -35,9 +29,11 @@ public class Portfolio extends BaseEntity {
   private static final long serialVersionUID = 5789856826031749553L;
 
   @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OrderBy("orderSeq ASC")
   private Set<OnlineJudge> onlineJudges = new HashSet<>();
 
   @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OrderBy("orderSeq ASC")
   private Set<Project> projects = new HashSet<>();
 
   @OneToOne(fetch = FetchType.LAZY)

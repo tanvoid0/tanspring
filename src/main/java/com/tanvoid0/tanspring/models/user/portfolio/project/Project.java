@@ -55,6 +55,7 @@ public class Project extends BaseEntity implements Serializable {
   private String demo;
   private String source;
 
+  @Enumerated(EnumType.STRING)
   private PlatformType platform = PlatformType.UNCATEGORIZED;
 
   @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -79,10 +80,10 @@ public class Project extends BaseEntity implements Serializable {
   @JoinColumn(name = "portfolio_id", nullable = false)
   private Portfolio portfolio;
 
-  private Long orderSec;
+  private Long orderSeq;
 
   @PostPersist
   private void postPersist() {
-    this.orderSec = this.id;
+    this.orderSeq = this.id;
   }
 }

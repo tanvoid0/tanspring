@@ -28,7 +28,7 @@ public class Hobby extends BaseEntity {
 
   private String image;
 
-  private Long orderSec;
+  private Long orderSeq;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id", nullable = false)
@@ -36,6 +36,6 @@ public class Hobby extends BaseEntity {
 
   @PostPersist
   private void postPersist() {
-    this.orderSec = this.id;
+    this.orderSeq = this.id;
   }
 }

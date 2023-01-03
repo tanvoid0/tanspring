@@ -28,4 +28,6 @@ public interface PortfolioService extends CustomService<Portfolio, PortfolioVO, 
   List<ProjectVO> getProject();
 
   boolean deleteProject(long id);
+
+  List<OnlineJudgeVO> getOnlineJudge();
 }

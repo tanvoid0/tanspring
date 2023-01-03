@@ -26,5 +26,5 @@ public class ProjectVO extends BaseVO {
   private PlatformType platform = PlatformType.UNCATEGORIZED;
   private List<TagVO> tags = new ArrayList<>();
   private List<ImageLinkVO> images = new ArrayList<>();
-  private Long orderSec;
+  private Long orderSeq;
 }

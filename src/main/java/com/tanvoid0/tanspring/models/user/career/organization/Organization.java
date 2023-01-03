@@ -11,11 +11,7 @@ import lombok.experimental.SuperBuilder;
 import java.io.Serial;
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -50,4 +46,10 @@ public abstract class Organization extends BaseEntity implements Serializable {
   @Column(length = 3000)
   private String activities;
 
+  private Long orderSeq;
+
+  @PostPersist
+  private void postPersist() {
+    this.orderSeq = this.id;
+  }
 }

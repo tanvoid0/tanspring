@@ -4,10 +4,7 @@ import com.tanvoid0.tanspring.common.exception.ResourceNotFoundException;
 import com.tanvoid0.tanspring.models.user.User;
 import com.tanvoid0.tanspring.models.user.UserService;
 import com.tanvoid0.tanspring.models.user.UserVO;
-import com.tanvoid0.tanspring.models.user.portfolio.oj.NewOnlineJudgeVO;
-import com.tanvoid0.tanspring.models.user.portfolio.oj.OnlineJudge;
-import com.tanvoid0.tanspring.models.user.portfolio.oj.OnlineJudgeRepository;
-import com.tanvoid0.tanspring.models.user.portfolio.oj.OnlineJudgeVO;
+import com.tanvoid0.tanspring.models.user.portfolio.oj.*;
 import com.tanvoid0.tanspring.models.user.portfolio.project.NewProjectVO;
 import com.tanvoid0.tanspring.models.user.portfolio.project.ProjectServiceImpl;
 import com.tanvoid0.tanspring.models.user.portfolio.project.ProjectVO;
@@ -31,6 +28,9 @@ public class PortfolioServiceImpl implements PortfolioService {
 
   @Autowired
   private ProjectServiceImpl projectService;
+
+  @Autowired
+  private OnlineJudgeServiceImpl onlineJudgeService;
 
   @Autowired
   private UserService userService;
@@ -108,6 +108,12 @@ public class PortfolioServiceImpl implements PortfolioService {
   @Override
   public boolean deleteProject(long id) {
     return projectService.delete(id);
+  }
+
+  @Override
+  public List<OnlineJudgeVO> getOnlineJudge() {
+    final Portfolio portfolio = this.findOrCreateByUser();
+    return onlineJudgeService.getByPortfolioId(portfolio.getId());
   }
 
   @Override

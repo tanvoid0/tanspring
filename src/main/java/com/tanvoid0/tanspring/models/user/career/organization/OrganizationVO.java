@@ -35,4 +35,5 @@ public class OrganizationVO extends BaseVO {
   private String timeline;
   private String description;
   private String activities;
+  private Long orderSeq;
 }

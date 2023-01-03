@@ -43,10 +43,10 @@ public abstract class BaseSkill extends BaseEntity implements Serializable {
 
   private String description;
 
-  private Long orderSec;
+  private Long orderSeq;
 
   @PostPersist
   private void postPersist() {
-    this.orderSec = this.id;
+    this.orderSeq = this.id;
   }
 }
