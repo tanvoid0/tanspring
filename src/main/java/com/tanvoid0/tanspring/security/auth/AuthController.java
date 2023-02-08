@@ -62,6 +62,13 @@ public class AuthController {
     return userService.register(newUserVO);
   }
 
+  @ApiOperation(value = "REST API to authenticate user using token")
+  @PostMapping("/authenticate")
+  @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_MODERATOR')")
+  public UserVO authenticate() {
+    return userService.getAuthUserVO();
+  }
+
   @ApiOperation("Get ALl users")
   @GetMapping
   public List<UserVO> getAll() {
@@ -73,7 +80,7 @@ public class AuthController {
   @GetMapping("/{id}")
   public UserVO get(@PathVariable("id") final long id) {
     log.info("Find user with id {}", id);
-    return userService.get(id);
+    return userService.getUserVOByUsername(id);
   }
 
   @ApiOperation("Get User career")
@@ -96,13 +103,6 @@ public class AuthController {
   public boolean deleteUser(@PathVariable("id") final long id) {
     log.info("Deleting user with id {}", id);
     return userService.delete(id);
-  }
-
-  @ApiOperation(value = "REST API to authenticate user using token")
-  @PostMapping("/authenticate")
-  @PreAuthorize("hasRole('USER')")
-  public UserVO authenticate() {
-    return userService.getAuthUserVO();
   }
 
   @ApiOperation(value = "REST API to fetch portfolio data")

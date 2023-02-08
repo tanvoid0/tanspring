@@ -9,14 +9,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewProjectVO {
+  @NotNull
   private String title;
   private String timeline;
   private String description;
@@ -24,6 +27,6 @@ public class NewProjectVO {
   private String source;
   private ProjectStatus status = ProjectStatus.UNKNOWN;
   private PlatformType platform = PlatformType.UNCATEGORIZED;
-  private final Set<NewTagVO> tags = new HashSet<>();
-  private final Set<NewImageLinkVO> images = new HashSet<>();
+  private final List<NewTagVO> tags = new ArrayList<>();
+  private final List<NewImageLinkVO> images = new ArrayList<>();
 }

@@ -9,9 +9,11 @@ import java.util.List;
 public interface UserService {
   List<UserVO> getAll();
 
-  UserVO get(long id);
+  User findByUsername(String username);
 
-  UserVO get(String username);
+  UserVO getUserVOByUsername(long id);
+
+  UserVO getUserVOByUsername(String username);
 
   UserVO getPortfolio(String username);
 
@@ -19,6 +21,8 @@ public interface UserService {
   UserVO create(NewUserVO newVO);
 
   UserVO update(UpdateUserVO updateVO);
+
+  UserVO updateInfo(UpdateUserInfoVO updateUserInfoVO);
 
   boolean delete(long id);
 
@@ -32,4 +36,5 @@ public interface UserService {
 
   UserVO getAuthUserVO();
 
+  User findById(long id);
 }

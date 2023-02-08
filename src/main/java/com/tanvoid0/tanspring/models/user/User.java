@@ -2,6 +2,8 @@ package com.tanvoid0.tanspring.models.user;
 
 //import com.tanvoid0.tanspring.models.user.career.Career;
 
+import lombok.Data;
+
 import com.tanvoid0.tanspring.common.vo.BaseEntity;
 import com.tanvoid0.tanspring.models.user.career.Career;
 import com.tanvoid0.tanspring.models.user.hobby.Hobby;
@@ -10,12 +12,21 @@ import com.tanvoid0.tanspring.models.user.skill.entity.SkillEntity;
 import com.tanvoid0.tanspring.models.user.social.Social;
 import com.tanvoid0.tanspring.security.auth.Role;
 
-import lombok.Data;
-
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Data
 @Entity

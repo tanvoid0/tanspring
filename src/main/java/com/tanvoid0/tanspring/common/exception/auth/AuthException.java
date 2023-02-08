@@ -1,4 +1,4 @@
-package com.tanvoid0.tanspring.common.exception;
+package com.tanvoid0.tanspring.common.exception.auth;
 
 import org.springframework.http.HttpStatus;
 

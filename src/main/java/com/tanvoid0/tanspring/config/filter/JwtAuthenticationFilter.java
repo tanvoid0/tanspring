@@ -1,6 +1,7 @@
-package com.tanvoid0.tanspring.security.jwt;
+package com.tanvoid0.tanspring.config.filter;
 
 import com.tanvoid0.tanspring.security.auth.CustomUserDetailsService;
+import com.tanvoid0.tanspring.security.jwt.JwtTokenProvider;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,11 +28,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   private CustomUserDetailsService customUserDetailsService;
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request,
-                                  HttpServletResponse response,
-                                  FilterChain filterChain) throws ServletException, IOException {
+  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
     // get JWT (token) from http request
-    String token = getJWTfromRequest(request);
+    String token = getJWTFromRequest(request);
     // validate token
     if (StringUtils.hasText(token) && tokenProvider.validateToken(token)) {
       // get username from token
@@ -39,9 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       // load user associated with token
       UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
 
-      UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-          userDetails, null, userDetails.getAuthorities()
-      );
+      UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
       authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
       // set spring security
       SecurityContextHolder.getContext().setAuthentication(authenticationToken);
@@ -50,9 +47,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   }
 
   // Bearer <accessToken>
-  private String getJWTfromRequest(HttpServletRequest request) {
+  private String getJWTFromRequest(HttpServletRequest request) {
+
     String bearerToken = request.getHeader("Authorization");
-    if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+    if (bearerToken == null) {
+      bearerToken = request.getHeader("authorization");
+    }
+    if (StringUtils.hasText(bearerToken) && (bearerToken.startsWith("Bearer ") || bearerToken.startsWith("bearer "))) {
       return bearerToken.substring(7, bearerToken.length());
     }
     return null;

@@ -1,6 +1,7 @@
 package com.tanvoid0.tanspring.models.user.portfolio;
 
 import com.tanvoid0.tanspring.common.template.CustomService;
+import com.tanvoid0.tanspring.models.user.UpdateUserInfoVO;
 import com.tanvoid0.tanspring.models.user.User;
 import com.tanvoid0.tanspring.models.user.UserVO;
 import com.tanvoid0.tanspring.models.user.portfolio.oj.NewOnlineJudgeVO;
@@ -23,11 +24,16 @@ public interface PortfolioService extends CustomService<Portfolio, PortfolioVO, 
 
   ProjectVO addProject(NewProjectVO newVO);
 
+  UserVO updateInfo(UpdateUserInfoVO updateVO) throws Exception;
+
   UserVO getUserPortfolio(String username);
 
   List<ProjectVO> getProject();
 
+  ProjectVO getProjectById(long id);
+
   boolean deleteProject(long id);
 
   List<OnlineJudgeVO> getOnlineJudge();
+
 }

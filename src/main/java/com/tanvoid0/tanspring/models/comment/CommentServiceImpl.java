@@ -1,7 +1,7 @@
 package com.tanvoid0.tanspring.models.comment;
 
 import com.tanvoid0.tanspring.models.post.Post;
-import com.tanvoid0.tanspring.common.exception.BlogAPIException;
+import com.tanvoid0.tanspring.common.exception.ApiException;
 import com.tanvoid0.tanspring.common.exception.ResourceNotFoundException;
 import com.tanvoid0.tanspring.models.post.PostRepository;
 
@@ -57,7 +57,7 @@ public class CommentServiceImpl implements CommentService {
     Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new ResourceNotFoundException("Comment", "id", commentId));
 
     if (!comment.getPost().getId().equals(post.getId())) {
-      throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Comment does not belong to post");
+      throw new ApiException(HttpStatus.BAD_REQUEST, "Comment does not belong to post");
     }
     return mapToDTO(comment);
   }
@@ -71,7 +71,7 @@ public class CommentServiceImpl implements CommentService {
     Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new ResourceNotFoundException("Comment", "id", commentId));
 
     if (!comment.getPost().getId().equals(post.getId())) {
-      throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Comment does not belong to post");
+      throw new ApiException(HttpStatus.BAD_REQUEST, "Comment does not belong to post");
     }
 
     comment.setName(commentRequest.getName());
@@ -91,7 +91,7 @@ public class CommentServiceImpl implements CommentService {
     Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new ResourceNotFoundException("Comment", "id", commentId));
 
     if (!comment.getPost().getId().equals(post.getId())) {
-      throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Comment does not belongs to post");
+      throw new ApiException(HttpStatus.BAD_REQUEST, "Comment does not belongs to post");
     }
 
     commentRepository.delete(comment);

@@ -1,6 +1,7 @@
 package com.tanvoid0.tanspring.models.user.portfolio.project;
 
 import com.tanvoid0.tanspring.common.exception.ResourceNotFoundException;
+import com.tanvoid0.tanspring.common.vo.SwapOrderSequence;
 import com.tanvoid0.tanspring.models.user.portfolio.Portfolio;
 import com.tanvoid0.tanspring.models.user.portfolio.PortfolioService;
 
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
@@ -89,5 +91,21 @@ public class ProjectServiceImpl implements ProjectService {
     final List<Project> projects = repository.findByPortfolio_Id(portfolioId);
     final List<ProjectVO> projectVOs = projects.stream().map(this::convertEntityToVO).toList();
     return projectVOs;
+  }
+
+  @Override
+  public List<ProjectVO> swap(SwapOrderSequence swapVO) {
+    final Project entity1 = findEntity(swapVO.getId1());
+    final Project entity2 = findEntity(swapVO.getId2());
+    final long seq1 = entity1.getOrderSeq();
+    final long seq2 = entity2.getOrderSeq();
+
+    entity1.setOrderSeq(seq2);
+    entity2.setOrderSeq(seq1);
+
+    final Project savedEntity1 = repository.save(entity1);
+    final Project savedEntity2 = repository.save(entity2);
+
+    return Stream.of(savedEntity1, savedEntity2).map(this::convertEntityToVO).toList();
   }
 }

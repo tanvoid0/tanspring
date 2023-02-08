@@ -1,12 +1,17 @@
 package com.tanvoid0.tanspring.models.user.portfolio;
 
 import com.tanvoid0.tanspring.common.exception.ResourceNotFoundException;
+import com.tanvoid0.tanspring.models.user.UpdateUserInfoVO;
 import com.tanvoid0.tanspring.models.user.User;
 import com.tanvoid0.tanspring.models.user.UserService;
 import com.tanvoid0.tanspring.models.user.UserVO;
-import com.tanvoid0.tanspring.models.user.portfolio.oj.*;
+import com.tanvoid0.tanspring.models.user.portfolio.oj.NewOnlineJudgeVO;
+import com.tanvoid0.tanspring.models.user.portfolio.oj.OnlineJudge;
+import com.tanvoid0.tanspring.models.user.portfolio.oj.OnlineJudgeRepository;
+import com.tanvoid0.tanspring.models.user.portfolio.oj.OnlineJudgeService;
+import com.tanvoid0.tanspring.models.user.portfolio.oj.OnlineJudgeVO;
 import com.tanvoid0.tanspring.models.user.portfolio.project.NewProjectVO;
-import com.tanvoid0.tanspring.models.user.portfolio.project.ProjectServiceImpl;
+import com.tanvoid0.tanspring.models.user.portfolio.project.ProjectService;
 import com.tanvoid0.tanspring.models.user.portfolio.project.ProjectVO;
 
 import org.modelmapper.ModelMapper;
@@ -27,10 +32,10 @@ public class PortfolioServiceImpl implements PortfolioService {
   private OnlineJudgeRepository onlineJudgeRepository;
 
   @Autowired
-  private ProjectServiceImpl projectService;
+  private ProjectService projectService;
 
   @Autowired
-  private OnlineJudgeServiceImpl onlineJudgeService;
+  private OnlineJudgeService onlineJudgeService;
 
   @Autowired
   private UserService userService;
@@ -95,14 +100,26 @@ public class PortfolioServiceImpl implements PortfolioService {
   }
 
   @Override
+  public UserVO updateInfo(UpdateUserInfoVO updateVO) throws Exception {
+    final UserVO userVO = userService.updateInfo(updateVO);
+
+    return userService.getUserVOByUsername(userVO.getUsername());
+  }
+
+  @Override
   public UserVO getUserPortfolio(String username) {
-    return userService.get(username);
+    return userService.getUserVOByUsername(username);
   }
 
   @Override
   public List<ProjectVO> getProject() {
     final Portfolio portfolio = this.findOrCreateByUser();
     return projectService.getByPortfolioId(portfolio.getId());
+  }
+
+  @Override
+  public ProjectVO getProjectById(final long id) {
+    return projectService.get(id);
   }
 
   @Override

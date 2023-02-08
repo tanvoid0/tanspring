@@ -1,12 +1,14 @@
 package com.tanvoid0.tanspring.models.user.social;
 
 import com.tanvoid0.tanspring.common.exception.ResourceNotFoundException;
+import com.tanvoid0.tanspring.common.vo.SwapOrderSequence;
 import com.tanvoid0.tanspring.models.user.UserService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @Service("socialService")
 public class SocialServiceImpl implements SocialService {
@@ -75,5 +77,22 @@ public class SocialServiceImpl implements SocialService {
   @Override
   public Social convertVOToEntity(SocialVO socialVO) {
     return mapper.map(socialVO, Social.class);
+  }
+
+  @Override
+  public List<SocialVO> swap(SwapOrderSequence swapOrderSequence) {
+    final Social entity1 = findEntity(swapOrderSequence.getId1());
+    final Social entity2 = findEntity(swapOrderSequence.getId2());
+
+    final long seq1 = entity1.getOrderSeq();
+    final long seq2 = entity2.getOrderSeq();
+
+    entity1.setOrderSeq(seq2);
+    entity2.setOrderSeq(seq1);
+
+    final Social savedEntity1 = repository.save(entity1);
+    final Social savedEntity2 = repository.save(entity2);
+
+    return Stream.of(savedEntity1, savedEntity2).map(this::convertEntityToVO).toList();
   }
 }
