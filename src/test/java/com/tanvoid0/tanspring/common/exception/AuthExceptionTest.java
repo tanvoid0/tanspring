@@ -3,6 +3,8 @@ package com.tanvoid0.tanspring.common.exception;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import com.tanvoid0.tanspring.common.exception.auth.AuthException;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 

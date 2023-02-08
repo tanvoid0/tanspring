@@ -1,8 +1,8 @@
 package com.tanvoid0.tanspring.config;
 
+import com.tanvoid0.tanspring.config.filter.JwtAuthenticationFilter;
 import com.tanvoid0.tanspring.security.auth.CustomUserDetailsService;
 import com.tanvoid0.tanspring.security.jwt.JwtAuthenticationEntryPoint;
-import com.tanvoid0.tanspring.security.jwt.JwtAuthenticationFilter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -44,6 +44,7 @@ public class SecurityConfig {
   protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
         .csrf().disable()
+        .cors().disable()
         .exceptionHandling()
         .authenticationEntryPoint(authenticationEntryPoint)
         .and()
@@ -52,6 +53,10 @@ public class SecurityConfig {
         .and()
         .authorizeRequests((authorize) -> authorize
             .antMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/v1/user/**").permitAll()
+            .antMatchers(HttpMethod.PUT,
+                "/api/v1/portfolio/**").permitAll()
+            .antMatchers(HttpMethod.POST, "/api/v1/portfolio/**").permitAll()
             .antMatchers("/api/v1/auth/**").permitAll()
             .antMatchers("/v2/api-docs/**").permitAll()
             .antMatchers("/swagger-ui/**").permitAll()

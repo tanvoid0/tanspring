@@ -1,0 +1,16 @@
+{
+	"configurations": [
+		{
+			"name": "run app",
+			"type": "gradle",
+			"tasks": [
+				"bootRun"
+			],
+			"environment": {
+				"DATABASE_URL" : "jdbc:mysql://localhost:3306/api_dev?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
+				"DATABASE_USER" : "root",
+				"DATABASE_PASSWORD" : "root"
+			},
+		}
+	]
+}
