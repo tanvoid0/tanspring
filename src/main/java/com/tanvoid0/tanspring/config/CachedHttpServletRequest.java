@@ -5,8 +5,8 @@ import org.springframework.util.StreamUtils;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
 
 public class CachedHttpServletRequest extends HttpServletRequestWrapper {
   private byte[] cachedPayload;

@@ -7,8 +7,8 @@ import lombok.Data;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

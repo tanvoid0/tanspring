@@ -1,6 +1,6 @@
 package com.tanvoid0.tanspring.models.user.skill;
 
-import com.tanvoid0.tanspring.models.user.User;
+import com.tanvoid0.tanspring.models.user.AppUser;
 import com.tanvoid0.tanspring.models.user.UserService;
 import com.tanvoid0.tanspring.models.user.skill.entity.SkillEntity;
 import com.tanvoid0.tanspring.models.user.skill.entity.SkillEntityVO;
@@ -53,12 +53,12 @@ public class SkillServiceImpl implements SkillService {
 
   @Override
   public SkillEntity findOrCreateByUser() {
-    final User user = userService.getAuthUser();
+    final AppUser user = userService.getAuthUser();
     return this.findOrCreateByUser(user);
   }
 
   @Override
-  public SkillEntity findOrCreateByUser(User user) {
+  public SkillEntity findOrCreateByUser(AppUser user) {
     return repository.findByUser(user).orElseGet(() -> repository.save(SkillEntity.builder().user(user).build()));
   }
 

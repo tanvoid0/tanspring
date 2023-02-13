@@ -8,7 +8,7 @@ import com.tanvoid0.tanspring.models.util_entities.tag.TagVO;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 public class UpdateProjectVO extends BaseVO {
   private final List<TagVO> tags = new ArrayList<>();

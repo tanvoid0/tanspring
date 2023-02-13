@@ -9,9 +9,9 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdviceAdapter;
 
-import javax.servlet.http.HttpServletRequest;
-
 import java.lang.reflect.Type;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class RequestBodyInterceptor extends RequestBodyAdviceAdapter {

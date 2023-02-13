@@ -2,7 +2,7 @@ package com.tanvoid0.tanspring.models.user.hobby;
 
 import com.tanvoid0.tanspring.common.exception.ResourceNotFoundException;
 import com.tanvoid0.tanspring.common.vo.SwapOrderSequence;
-import com.tanvoid0.tanspring.models.user.User;
+import com.tanvoid0.tanspring.models.user.AppUser;
 import com.tanvoid0.tanspring.models.user.UserService;
 
 import org.modelmapper.ModelMapper;
@@ -34,7 +34,7 @@ public class HobbyServiceImpl implements HobbyService {
 
   @Override
   public HobbyVO add(final String username, final NewHobbyVO newVO) {
-    final User user = userService.findByUsername(username);
+    final AppUser user = userService.findByUsername(username);
 
     final Hobby entity = convertVOToEntity(newVO);
     entity.setUser(user);
@@ -61,7 +61,7 @@ public class HobbyServiceImpl implements HobbyService {
 
   @Override
   public List<HobbyVO> findByUsername(final String username) {
-    final User user = userService.findByUsername(username);
+    final AppUser user = userService.findByUsername(username);
     final List<Hobby> hobbies = repository.findAllByUserIdOrderByOrderSeq(user.getId());
     return hobbies.stream().map(this::convertEntityToVO).toList();
   }

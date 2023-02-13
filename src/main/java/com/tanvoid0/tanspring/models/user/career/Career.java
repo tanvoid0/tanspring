@@ -1,7 +1,7 @@
 package com.tanvoid0.tanspring.models.user.career;
 
 import com.tanvoid0.tanspring.common.vo.BaseEntity;
-import com.tanvoid0.tanspring.models.user.User;
+import com.tanvoid0.tanspring.models.user.AppUser;
 import com.tanvoid0.tanspring.models.user.career.academic.Academic;
 import com.tanvoid0.tanspring.models.user.career.achievement.Achievement;
 import com.tanvoid0.tanspring.models.user.career.certificate.Certificate;
@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Getter
 @Setter
@@ -55,5 +55,5 @@ public class Career extends BaseEntity implements Serializable {
 
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id", nullable = false)
-  private User user;
+  private AppUser user;
 }

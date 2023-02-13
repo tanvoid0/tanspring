@@ -2,7 +2,7 @@ package com.tanvoid0.tanspring.models.user.portfolio;
 
 import com.tanvoid0.tanspring.common.template.CustomService;
 import com.tanvoid0.tanspring.models.user.UpdateUserInfoVO;
-import com.tanvoid0.tanspring.models.user.User;
+import com.tanvoid0.tanspring.models.user.AppUser;
 import com.tanvoid0.tanspring.models.user.UserVO;
 import com.tanvoid0.tanspring.models.user.portfolio.oj.NewOnlineJudgeVO;
 import com.tanvoid0.tanspring.models.user.portfolio.oj.OnlineJudgeVO;
@@ -14,7 +14,7 @@ import java.util.List;
 public interface PortfolioService extends CustomService<Portfolio, PortfolioVO, NewPortfolioVO, UpdatePortfolio> {
   Portfolio findOrCreateByUser();
 
-  Portfolio findOrCreateByUser(User user);
+  Portfolio findOrCreateByUser(AppUser user);
 
   PortfolioVO addOnlineJudge(List<NewOnlineJudgeVO> newVOs);
 

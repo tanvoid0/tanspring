@@ -9,7 +9,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
+
 
 @ExtendWith(SpringExtension.class)
 @Rollback

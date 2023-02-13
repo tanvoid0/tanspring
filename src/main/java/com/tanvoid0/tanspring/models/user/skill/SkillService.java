@@ -1,6 +1,6 @@
 package com.tanvoid0.tanspring.models.user.skill;
 
-import com.tanvoid0.tanspring.models.user.User;
+import com.tanvoid0.tanspring.models.user.AppUser;
 import com.tanvoid0.tanspring.models.user.skill.entity.SkillEntity;
 import com.tanvoid0.tanspring.models.user.skill.entity.SkillEntityVO;
 import com.tanvoid0.tanspring.models.user.skill.entity.hard.NewSkillItemVO;
@@ -14,7 +14,7 @@ public interface SkillService {
 
   SkillEntity findOrCreateByUser();
 
-  SkillEntity findOrCreateByUser(User user);
+  SkillEntity findOrCreateByUser(AppUser user);
 
   List<SkillSoftVO> addSkillSoft(List<NewSkillItemVO> items);
 

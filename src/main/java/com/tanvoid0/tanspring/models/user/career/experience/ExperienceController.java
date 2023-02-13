@@ -1,9 +1,11 @@
 package com.tanvoid0.tanspring.models.user.career.experience;
 
 import com.tanvoid0.tanspring.common.template.CustomController;
+
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 @RestController

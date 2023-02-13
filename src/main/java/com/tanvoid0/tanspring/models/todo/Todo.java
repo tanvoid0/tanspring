@@ -12,14 +12,14 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Getter
 @Setter
@@ -29,35 +29,35 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "todos")
 public class Todo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    @Column(nullable = false)
-    private String title;
+  @Column(nullable = false)
+  private String title;
 
-    @Column
-    private String description;
+  @Column
+  private String description;
 
-    @Column
-    private String icon;
+  @Column
+  private String icon;
 
-    @Column
-    private ZonedDateTime deadline;
+  @Column
+  private ZonedDateTime deadline;
 
-    @Column
-    private ZonedDateTime reminder;
+  @Column
+  private ZonedDateTime reminder;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
-    @Column(nullable = false)
-    private Date createdAt;
+  @Temporal(TemporalType.TIMESTAMP)
+  @CreationTimestamp
+  @Column(nullable = false)
+  private Date createdAt;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @UpdateTimestamp
-    @Column(nullable = true)
-    private Date updatedAt;
+  @Temporal(TemporalType.TIMESTAMP)
+  @UpdateTimestamp
+  @Column(nullable = true)
+  private Date updatedAt;
 
-    @Column(nullable = false)
-    private long userId;
+  @Column(nullable = false)
+  private long userId;
 }

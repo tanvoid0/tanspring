@@ -8,15 +8,17 @@ import com.tanvoid0.tanspring.models.user.skill.entity.SkillEntityVO;
 import com.tanvoid0.tanspring.models.user.social.SocialVO;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Data
+@Getter
+@Setter
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor

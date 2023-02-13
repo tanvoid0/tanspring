@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/hobby")
@@ -61,7 +61,7 @@ public class HobbyController {
   public List<HobbyVO> swap(@RequestBody SwapOrderSequence swapOrderSequence) {
     return service.swap(swapOrderSequence);
   }
-  
+
   @PreAuthorize("hasRole('USER')")
   @PutMapping("/{id}")
   public HobbyVO update(@PathVariable final long id, @Valid @RequestBody final UpdateHobbyVO updateVO) {

@@ -2,16 +2,13 @@ package com.tanvoid0.tanspring.models.user;
 
 import com.tanvoid0.tanspring.common.exception.ResourceNotFoundException;
 import com.tanvoid0.tanspring.common.exception.auth.AuthException;
-import com.tanvoid0.tanspring.common.vo.JWTAuthResponseVO;
+import com.tanvoid0.tanspring.security.auth.AuthenticationResponseVO;
 import com.tanvoid0.tanspring.models.user.skill.entity.hard.framework.language.SkillLanguage;
 import com.tanvoid0.tanspring.models.user.skill.entity.hard.framework.language.SkillLanguageRepository;
 import com.tanvoid0.tanspring.models.user.skill.entity.hard.framework.language.SkillLanguageVO;
 import com.tanvoid0.tanspring.models.util_entities.ValidatorUtil;
 import com.tanvoid0.tanspring.security.auth.LoginUserVO;
 import com.tanvoid0.tanspring.security.auth.NewUserVO;
-import com.tanvoid0.tanspring.security.auth.Role;
-import com.tanvoid0.tanspring.security.auth.RoleRepository;
-import com.tanvoid0.tanspring.security.jwt.JwtTokenProvider;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -19,15 +16,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service("userService")
@@ -35,46 +29,38 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
   @Autowired
-  private AuthenticationManager authManager;
-
-  @Autowired
   private UserRepository repository;
-
-  @Autowired
-  private RoleRepository roleRepository;
 
   @Autowired
   private SkillLanguageRepository skillLanguageRepository;
 
   @Autowired
-  private PasswordEncoder passwordEncoder;
-
-  @Autowired
-  private JwtTokenProvider tokenProvider;
+  private BCryptPasswordEncoder passwordEncoder;
 
   @Autowired
   private ModelMapper mapper;
 
+
   @Override
   public List<UserVO> getAll() {
-    final List<User> users = repository.findAll();
+    final List<AppUser> users = repository.findAll();
     return users.stream().map(user -> mapper.map(user, UserVO.class)).toList();
   }
 
   @Override
-  public User findByUsername(final String username) {
+  public AppUser findByUsername(final String username) {
     return repository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
   }
 
   @Override
   public UserVO getUserVOByUsername(final long id) {
-    final User user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+    final AppUser user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
     return mapper.map(user, UserVO.class);
   }
 
   @Override
   public UserVO getUserVOByUsername(String username) {
-    final User user = this.findByUsername(username);
+    final AppUser user = this.findByUsername(username);
     final UserVO userVO = convertEntityToVo(user);
     return userVO;
   }
@@ -99,7 +85,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserVO update(final UpdateUserVO updateVO) {
-    final User entity = findById(updateVO.getId());
+    final AppUser entity = findById(updateVO.getId());
 
     mapper.map(updateVO, entity);
 
@@ -107,7 +93,7 @@ public class UserServiceImpl implements UserService {
       entity.setPassword(passwordEncoder.encode(entity.getPassword()));
     }
 
-    final User savedUser = repository.save(entity);
+    final AppUser savedUser = repository.save(entity);
     return mapper.map(savedUser, UserVO.class);
   }
 
@@ -115,25 +101,24 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserVO updateInfo(final UpdateUserInfoVO updateUserInfoVO) {
 //    final User entity = getAuthUser(); // TODO: fix when token validation works
-    final User entity = findByUsername("", updateUserInfoVO.getEmail());
+    final AppUser entity = findByUsername("", updateUserInfoVO.getEmail());
     mapper.map(updateUserInfoVO, entity);
 
     ValidatorUtil.staleVersionValidator(entity.getVersion(), updateUserInfoVO.getVersion());
 
-    final User savedUser = repository.save(entity);
+    final AppUser savedUser = repository.save(entity);
     return convertEntityToVo(savedUser);
   }
 
   @Override
   public boolean delete(long id) {
-    final User user = findById(id);
-    user.getRoles().removeAll(user.getRoles());
+    final AppUser user = findById(id);
     repository.deleteById(id);
     return true;
   }
 
   @Override
-  public UserVO register(NewUserVO newVO) {
+  public AppUser register(NewUserVO newVO) {
     // add check for username exists in a DB
     if (repository.existsByUsername(newVO.getUsername())) {
       throw new AuthException("Username is already taken!");
@@ -145,26 +130,24 @@ public class UserServiceImpl implements UserService {
     }
 
     // create user object
-    User user = mapper.map(newVO, User.class);
+    AppUser user = mapper.map(newVO, AppUser.class);
     user.setPassword(passwordEncoder.encode(newVO.getPassword()));
 
-    Role roles = roleRepository.findByName("ROLE_USER").get();
-    user.setRoles(Collections.singleton(roles));
-
-    User savedUser = repository.save(user);
-    return mapper.map(savedUser, UserVO.class);
+    AppUser savedUser = repository.save(user);
+    return savedUser;
   }
 
   @Override
-  public JWTAuthResponseVO login(LoginUserVO loginVO) {
+  public AuthenticationResponseVO login(LoginUserVO loginVO) {
     try {
-      Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(loginVO.getUsernameOrEmail(), loginVO.getPassword()));
-      SecurityContextHolder.getContext().setAuthentication(authentication);
+      return null;
+//      Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(loginVO.getUsernameOrEmail(), loginVO.getPassword()));
+//      SecurityContextHolder.getContext().setAuthentication(authentication);
 
       // get token form tokenProvider
-      String token = tokenProvider.generateToken(authentication);
+//      String token = tokenProvider.generateTokenWithAuthentication(authentication);
 
-      return new JWTAuthResponseVO(token);
+//      return new AuthenticationResponseVO("token");
     } catch (final BadCredentialsException ex) {
       log.debug("Exception: {}", ex.toString());
       throw new AuthException(HttpStatus.BAD_REQUEST, ex.getMessage());
@@ -180,7 +163,7 @@ public class UserServiceImpl implements UserService {
 
 
   @Override
-  public User getAuthUser() {
+  public AppUser getAuthUser() {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     if (auth == null) {
       return null;
@@ -194,16 +177,16 @@ public class UserServiceImpl implements UserService {
     return mapper.map(this.getAuthUser(), UserVO.class);
   }
 
-  private UserVO convertEntityToVo(final User user) {
+  private UserVO convertEntityToVo(final AppUser user) {
     return mapper.map(user, UserVO.class);
   }
 
   @Override
-  public User findById(final long id) {
+  public AppUser findById(final long id) {
     return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
   }
 
-  public User findByUsername(final String username, final String email) {
+  public AppUser findByUsername(final String username, final String email) {
     return repository.findByUsernameOrEmail(username, email)
         .orElseThrow(() ->
             new ResourceNotFoundException("User", "usernameOrEmail", String.format("username: %s, email: %s", username, email))

@@ -1,6 +1,6 @@
 package com.tanvoid0.tanspring.models.user;
 
-import com.tanvoid0.tanspring.common.vo.JWTAuthResponseVO;
+import com.tanvoid0.tanspring.security.auth.AuthenticationResponseVO;
 import com.tanvoid0.tanspring.security.auth.LoginUserVO;
 import com.tanvoid0.tanspring.security.auth.NewUserVO;
 
@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserService {
   List<UserVO> getAll();
 
-  User findByUsername(String username);
+  AppUser findByUsername(String username);
 
   UserVO getUserVOByUsername(long id);
 
@@ -26,15 +26,15 @@ public interface UserService {
 
   boolean delete(long id);
 
-  UserVO register(NewUserVO newVO);
+  AppUser register(NewUserVO newVO);
 
-  JWTAuthResponseVO login(LoginUserVO loginVO);
+  AuthenticationResponseVO login(LoginUserVO loginVO);
 
   long getAuthUserId();
 
-  User getAuthUser();
+  AppUser getAuthUser();
 
   UserVO getAuthUserVO();
 
-  User findById(long id);
+  AppUser findById(long id);
 }

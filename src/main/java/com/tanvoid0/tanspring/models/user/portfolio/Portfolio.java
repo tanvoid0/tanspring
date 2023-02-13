@@ -1,7 +1,7 @@
 package com.tanvoid0.tanspring.models.user.portfolio;
 
 import com.tanvoid0.tanspring.common.vo.BaseEntity;
-import com.tanvoid0.tanspring.models.user.User;
+import com.tanvoid0.tanspring.models.user.AppUser;
 import com.tanvoid0.tanspring.models.user.portfolio.oj.OnlineJudge;
 import com.tanvoid0.tanspring.models.user.portfolio.project.Project;
 
@@ -15,7 +15,7 @@ import java.io.Serial;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Getter
 @Setter
@@ -38,5 +38,5 @@ public class Portfolio extends BaseEntity {
 
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id", nullable = false)
-  private User user;
+  private AppUser user;
 }

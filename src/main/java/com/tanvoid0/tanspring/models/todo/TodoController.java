@@ -1,6 +1,5 @@
 package com.tanvoid0.tanspring.models.todo;
 
-import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import io.swagger.annotations.Api;
+import jakarta.validation.Valid;
 
 @Api(value = "TODO Controller")
 @RestController

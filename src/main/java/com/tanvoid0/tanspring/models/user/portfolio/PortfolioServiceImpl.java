@@ -2,7 +2,7 @@ package com.tanvoid0.tanspring.models.user.portfolio;
 
 import com.tanvoid0.tanspring.common.exception.ResourceNotFoundException;
 import com.tanvoid0.tanspring.models.user.UpdateUserInfoVO;
-import com.tanvoid0.tanspring.models.user.User;
+import com.tanvoid0.tanspring.models.user.AppUser;
 import com.tanvoid0.tanspring.models.user.UserService;
 import com.tanvoid0.tanspring.models.user.UserVO;
 import com.tanvoid0.tanspring.models.user.portfolio.oj.NewOnlineJudgeVO;
@@ -45,12 +45,12 @@ public class PortfolioServiceImpl implements PortfolioService {
 
   @Override
   public Portfolio findOrCreateByUser() {
-    final User user = userService.getAuthUser();
+    final AppUser user = userService.getAuthUser();
     return this.findOrCreateByUser(user);
   }
 
   @Override
-  public Portfolio findOrCreateByUser(User user) {
+  public Portfolio findOrCreateByUser(AppUser user) {
     return repository.findByUser(user)
         .orElseGet(() -> repository.save(Portfolio.builder().user(user).build()));
   }

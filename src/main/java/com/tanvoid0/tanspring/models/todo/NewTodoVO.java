@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.ZonedDateTime;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor

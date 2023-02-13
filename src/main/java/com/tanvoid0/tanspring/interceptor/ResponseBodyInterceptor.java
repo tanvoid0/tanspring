@@ -25,9 +25,7 @@ public class ResponseBodyInterceptor implements ResponseBodyAdvice<Object> {
   }
 
   @Override
-  public Object beforeBodyWrite(Object body, MethodParameter returnType,
-                                MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType,
-                                ServerHttpRequest request, ServerHttpResponse response) {
+  public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
     loggingService.displayResp(((ServletServerHttpRequest) request).getServletRequest(), ((ServletServerHttpResponse) response).getServletResponse(), body);
     return body;
   }

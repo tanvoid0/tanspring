@@ -1,20 +1,20 @@
 package com.tanvoid0.tanspring.models.user.skill.entity.hard.framework.language;
 
+import com.tanvoid0.tanspring.common.vo.BaseEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import com.tanvoid0.tanspring.common.vo.BaseEntity;
-
 import java.io.Serial;
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PostPersist;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PostPersist;
+import jakarta.persistence.Table;
 
 @Getter
 @Setter

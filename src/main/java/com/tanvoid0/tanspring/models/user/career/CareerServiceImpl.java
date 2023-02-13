@@ -1,7 +1,7 @@
 package com.tanvoid0.tanspring.models.user.career;
 
 import com.tanvoid0.tanspring.common.exception.ResourceNotFoundException;
-import com.tanvoid0.tanspring.models.user.User;
+import com.tanvoid0.tanspring.models.user.AppUser;
 import com.tanvoid0.tanspring.models.user.UserService;
 
 import org.modelmapper.ModelMapper;
@@ -75,18 +75,18 @@ public class CareerServiceImpl implements CareerService {
 
   @Override
   public Career findOrCreateByUser() {
-    final User user = userService.getAuthUser();
+    final AppUser user = userService.getAuthUser();
     return this.findOrCreateByUser(user);
   }
 
   @Override
-  public Career findOrCreateByUser(final User user) {
+  public Career findOrCreateByUser(final AppUser user) {
     return repository.findByUser(user).orElseGet(() -> repository.save(Career.builder().user(user).build()));
   }
 
   @Override
   public CareerVO getByUsername(String username) {
-    final User user = mapper.map(userService.getUserVOByUsername(username), User.class);
+    final AppUser user = mapper.map(userService.getUserVOByUsername(username), AppUser.class);
     final Career career = repository.findByUser(user).orElseThrow(() -> new ResourceNotFoundException("Career", "userId", user.getId()));
     return convertEntityToVO(career);
   }

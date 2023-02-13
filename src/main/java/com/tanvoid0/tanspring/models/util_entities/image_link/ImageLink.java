@@ -8,10 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
-
 import java.io.Serial;
 import java.io.Serializable;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Getter
 @Setter

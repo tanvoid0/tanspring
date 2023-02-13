@@ -1,8 +1,5 @@
 package com.tanvoid0.tanspring.models.post;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
 import com.tanvoid0.tanspring.utils.AppConstants;
 
 import org.springframework.http.HttpStatus;
@@ -18,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import jakarta.validation.Valid;
 
 @Api(value = "CRUD REST APIs for Post Resources")
 @RestController

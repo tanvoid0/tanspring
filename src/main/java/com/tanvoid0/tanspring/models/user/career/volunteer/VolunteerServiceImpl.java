@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
-
 import java.util.List;
+
+import jakarta.validation.Valid;
 
 @Service("volunteerService")
 public class VolunteerServiceImpl implements VolunteerService {

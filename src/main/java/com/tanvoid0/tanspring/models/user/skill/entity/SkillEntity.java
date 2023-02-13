@@ -1,7 +1,7 @@
 package com.tanvoid0.tanspring.models.user.skill.entity;
 
 import com.tanvoid0.tanspring.common.vo.BaseEntity;
-import com.tanvoid0.tanspring.models.user.User;
+import com.tanvoid0.tanspring.models.user.AppUser;
 import com.tanvoid0.tanspring.models.user.skill.entity.hard.SkillHard;
 import com.tanvoid0.tanspring.models.user.skill.entity.hard.framework.SkillFramework;
 import com.tanvoid0.tanspring.models.user.skill.entity.linguistic.SkillLinguistic;
@@ -18,7 +18,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Getter
 @Setter
@@ -61,5 +61,5 @@ public class SkillEntity extends BaseEntity implements Serializable {
 
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id", nullable = false)
-  private User user;
+  private AppUser user;
 }

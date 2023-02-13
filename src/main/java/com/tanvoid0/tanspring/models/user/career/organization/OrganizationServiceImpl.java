@@ -1,6 +1,6 @@
 package com.tanvoid0.tanspring.models.user.career.organization;
 
-import com.tanvoid0.tanspring.models.user.User;
+import com.tanvoid0.tanspring.models.user.AppUser;
 import com.tanvoid0.tanspring.models.user.UserService;
 import com.tanvoid0.tanspring.models.user.career.Career;
 import com.tanvoid0.tanspring.models.user.career.CareerService;
@@ -30,7 +30,7 @@ public class OrganizationServiceImpl implements OrganizationService {
   @Autowired
   private ModelMapper mapper;
 
-  private User user;
+  private AppUser user;
 
   @Override
   public List<OrganizationVO> get() {
