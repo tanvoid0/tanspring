@@ -17,7 +17,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PostPersist;
 import jakarta.persistence.Table;
 
 @Getter
@@ -36,14 +35,8 @@ public class Experience extends Organization implements Serializable {
   @Column(nullable = false)
   private String role;
 
-  private Long orderSeq;
-
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "career_id", nullable = false)
   private Career career;
 
-  @PostPersist
-  private void postPersist() {
-    this.orderSeq = this.id;
-  }
 }

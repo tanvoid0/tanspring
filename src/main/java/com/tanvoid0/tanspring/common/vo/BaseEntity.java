@@ -13,7 +13,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
@@ -21,8 +21,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.PostPersist;
 import jakarta.persistence.Version;
 
 @Getter
@@ -43,13 +42,19 @@ public abstract class BaseEntity implements Serializable {
   @Version
   protected long version;
 
-  @Temporal(TemporalType.TIMESTAMP)
   @CreationTimestamp
   @Column(nullable = false)
-  protected Date createdAt;
+  protected LocalDateTime createdAt;
 
-  @Temporal(TemporalType.TIMESTAMP)
   @UpdateTimestamp
   @Column(nullable = false)
-  protected Date updatedAt;
+  protected LocalDateTime updatedAt;
+
+  protected Long orderSeq;
+
+  @PostPersist
+  protected void postPersist() {
+    this.orderSeq = this.id;
+  }
+
 }

@@ -3,7 +3,7 @@ package com.tanvoid0.tanspring.models.user.portfolio.project;
 import com.tanvoid0.tanspring.common.vo.BaseEntity;
 import com.tanvoid0.tanspring.models.user.portfolio.Portfolio;
 import com.tanvoid0.tanspring.models.user.skill.entity.hard.framework.PlatformType;
-import com.tanvoid0.tanspring.models.util_entities.image_link.ImageLink;
+import com.tanvoid0.tanspring.models.util_entities.image_link.ProjectFile;
 import com.tanvoid0.tanspring.models.util_entities.tag.Tag;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.PostPersist;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -67,11 +67,8 @@ public class Project extends BaseEntity implements Serializable {
 
 
   @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  @JoinTable(name = "project_images",
-      joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
-      inverseJoinColumns = @JoinColumn(name = "image_id", referencedColumnName = "id")
-  )
-  private Set<ImageLink> images = new HashSet<>();
+  @OrderBy("orderSeq ASC")
+  private Set<ProjectFile> images = new HashSet<>();
 
   @Enumerated(EnumType.STRING)
   private ProjectStatus status;
@@ -79,11 +76,4 @@ public class Project extends BaseEntity implements Serializable {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "portfolio_id", nullable = false)
   private Portfolio portfolio;
-
-  private Long orderSeq;
-
-  @PostPersist
-  private void postPersist() {
-    this.orderSeq = this.id;
-  }
 }

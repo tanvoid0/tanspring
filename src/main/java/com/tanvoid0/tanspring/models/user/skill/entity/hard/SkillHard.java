@@ -31,8 +31,6 @@ public class SkillHard extends BaseEntity implements Serializable {
   @Column(nullable = false, unique = true)
   private String name;
 
-  private Long orderSeq;
-
   @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, orphanRemoval = true)
   @OrderBy("orderSeq ASC")
   private List<SkillItem> items = new ArrayList<>();
@@ -41,8 +39,4 @@ public class SkillHard extends BaseEntity implements Serializable {
   @JoinColumn(name = "skill_id", nullable = false)
   private SkillEntity skill;
 
-  @PostPersist
-  private void postPersist() {
-    this.orderSeq = this.id;
-  }
 }

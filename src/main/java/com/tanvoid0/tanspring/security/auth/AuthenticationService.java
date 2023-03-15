@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +63,14 @@ public class AuthenticationService {
     authUser.setToken(jwtToken);
     authUser.setExpiresIn(jwtService.expiresIn());
     return authUser;
+  }
+
+  public AppUser getAuthUser() {
+    final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (auth == null) {
+      return null;
+    }
+    final String username = auth.getName();
+    return repository.findByUsernameOrEmail(username, username).orElseThrow(() -> new ResourceNotFoundException("user", "usernameOrEmail", username));
   }
 }

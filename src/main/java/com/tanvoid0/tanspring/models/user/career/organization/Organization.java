@@ -46,10 +46,4 @@ public abstract class Organization extends BaseEntity implements Serializable {
   @Column(length = 3000)
   private String activities;
 
-  private Long orderSeq;
-
-  @PostPersist
-  private void postPersist() {
-    this.orderSeq = this.id;
-  }
 }

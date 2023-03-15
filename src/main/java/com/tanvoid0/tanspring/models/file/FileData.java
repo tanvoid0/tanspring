@@ -1,13 +1,14 @@
-package com.tanvoid0.tanspring.models.user.social;
+package com.tanvoid0.tanspring.models.file;
 
 import com.tanvoid0.tanspring.common.vo.BaseEntity;
 import com.tanvoid0.tanspring.models.user.AppUser;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
+import java.io.Serializable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,27 +18,25 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
-@Getter
-@Setter
-@SuperBuilder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 @Entity
-@Table(name = "user_socials", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"url"})
-})
-public class Social extends BaseEntity {
+@Table(name = "file_data",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"name"})
+    })
+public abstract class FileData extends BaseEntity implements Serializable {
 
-  @Column(nullable = false)
-  private String title;
+  @Column(unique = true, nullable = false)
+  protected String name;
 
-  @Column(nullable = false)
-  private String url;
+  protected String type;
 
-  private String image;
-  private String icon;
+  protected String url;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id", nullable = false)
-  private AppUser user;
+  protected AppUser user;
 }

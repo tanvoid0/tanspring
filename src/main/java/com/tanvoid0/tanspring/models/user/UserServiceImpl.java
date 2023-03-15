@@ -2,11 +2,11 @@ package com.tanvoid0.tanspring.models.user;
 
 import com.tanvoid0.tanspring.common.exception.ResourceNotFoundException;
 import com.tanvoid0.tanspring.common.exception.auth.AuthException;
-import com.tanvoid0.tanspring.security.auth.AuthenticationResponseVO;
 import com.tanvoid0.tanspring.models.user.skill.entity.hard.framework.language.SkillLanguage;
 import com.tanvoid0.tanspring.models.user.skill.entity.hard.framework.language.SkillLanguageRepository;
 import com.tanvoid0.tanspring.models.user.skill.entity.hard.framework.language.SkillLanguageVO;
 import com.tanvoid0.tanspring.models.util_entities.ValidatorUtil;
+import com.tanvoid0.tanspring.security.auth.AuthenticationResponseVO;
 import com.tanvoid0.tanspring.security.auth.LoginUserVO;
 import com.tanvoid0.tanspring.security.auth.NewUserVO;
 
@@ -19,7 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
   private SkillLanguageRepository skillLanguageRepository;
 
   @Autowired
-  private BCryptPasswordEncoder passwordEncoder;
+  private PasswordEncoder passwordEncoder;
 
   @Autowired
   private ModelMapper mapper;
@@ -61,8 +61,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserVO getUserVOByUsername(String username) {
     final AppUser user = this.findByUsername(username);
-    final UserVO userVO = convertEntityToVo(user);
-    return userVO;
+    return convertEntityToVo(user);
   }
 
   @Override
@@ -100,7 +99,6 @@ public class UserServiceImpl implements UserService {
   @SneakyThrows
   @Override
   public UserVO updateInfo(final UpdateUserInfoVO updateUserInfoVO) {
-//    final User entity = getAuthUser(); // TODO: fix when token validation works
     final AppUser entity = findByUsername("", updateUserInfoVO.getEmail());
     mapper.map(updateUserInfoVO, entity);
 
@@ -112,7 +110,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public boolean delete(long id) {
-    final AppUser user = findById(id);
+    findById(id);
     repository.deleteById(id);
     return true;
   }
@@ -120,12 +118,12 @@ public class UserServiceImpl implements UserService {
   @Override
   public AppUser register(NewUserVO newVO) {
     // add check for username exists in a DB
-    if (repository.existsByUsername(newVO.getUsername())) {
+    if (repository.existsByUsername(newVO.getUsername()).equals(Boolean.TRUE)) {
       throw new AuthException("Username is already taken!");
     }
 
     // add check for email exists in DB
-    if (repository.existsByEmail(newVO.getEmail())) {
+    if (repository.existsByEmail(newVO.getEmail()).equals(Boolean.TRUE)) {
       throw new AuthException("Email already taken!");
     }
 
@@ -133,8 +131,7 @@ public class UserServiceImpl implements UserService {
     AppUser user = mapper.map(newVO, AppUser.class);
     user.setPassword(passwordEncoder.encode(newVO.getPassword()));
 
-    AppUser savedUser = repository.save(user);
-    return savedUser;
+    return repository.save(user);
   }
 
   @Override
@@ -164,11 +161,11 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public AppUser getAuthUser() {
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     if (auth == null) {
       return null;
     }
-    String username = auth.getName();
+    final String username = auth.getName();
     return repository.findByUsernameOrEmail(username, username).orElseThrow(() -> new ResourceNotFoundException("user", "usernameOrEmail", username));
   }
 

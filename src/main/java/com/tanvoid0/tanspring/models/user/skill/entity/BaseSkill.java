@@ -16,7 +16,6 @@ import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PostPersist;
 
 @Getter
 @Setter
@@ -43,10 +42,4 @@ public abstract class BaseSkill extends BaseEntity implements Serializable {
 
   private String description;
 
-  private Long orderSeq;
-
-  @PostPersist
-  private void postPersist() {
-    this.orderSeq = this.id;
-  }
 }

@@ -13,7 +13,6 @@ import java.io.Serializable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.PostPersist;
 import jakarta.persistence.Table;
 
 @Getter
@@ -38,10 +37,4 @@ public class SkillLanguage extends BaseEntity implements Serializable {
 
   private String description;
 
-  private Long orderSeq;
-
-  @PostPersist
-  private void postPersist() {
-    this.orderSeq = this.id;
-  }
 }

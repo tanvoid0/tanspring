@@ -1,8 +1,10 @@
 package com.tanvoid0.tanspring.config;
 
+import com.github.javafaker.Faker;
 import com.tanvoid0.tanspring.models.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -18,14 +20,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
+@Slf4j
 public class AppConfig {
 
   private final UserRepository repository;
 
   @Bean
   public UserDetailsService userDetailsService() {
-    return username -> repository.findByEmail(username)
-        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    return username -> {
+      log.debug("Username: {}", username);
+      return repository.findByEmail(username)
+          .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    };
   }
 
   @Bean
@@ -50,6 +56,11 @@ public class AppConfig {
   @Bean
   public ModelMapper mapper() {
     return new ModelMapper();
+  }
+
+  @Bean
+  public Faker faker() {
+    return new Faker();
   }
 
 }

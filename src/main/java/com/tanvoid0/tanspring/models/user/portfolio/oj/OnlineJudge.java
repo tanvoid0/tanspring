@@ -17,7 +17,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PostPersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -51,10 +50,4 @@ public class OnlineJudge extends BaseEntity implements Serializable {
   @JoinColumn(name = "portfolio_id", nullable = false)
   private Portfolio portfolio;
 
-  private Long orderSeq;
-
-  @PostPersist
-  private void postPersist() {
-    this.orderSeq = this.id;
-  }
 }
