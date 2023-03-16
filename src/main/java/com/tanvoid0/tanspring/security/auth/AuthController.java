@@ -29,7 +29,7 @@ public class AuthController {
   private final CareerService careerService;
 
   @PostMapping("/login")
-  public UserVO login(@RequestBody LoginUserVO loginUserVO) {
+  public UserVO login(@RequestBody final LoginUserVO loginUserVO) {
     return service.login(loginUserVO);
   }
 
