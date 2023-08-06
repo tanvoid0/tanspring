@@ -29,6 +29,14 @@ public class SecurityConfig {
         .authorizeHttpRequests()
         .requestMatchers("/api/v1/auth/**")
         .permitAll()
+        .requestMatchers("/api/v1/portfolio/**")
+        .permitAll()
+        .requestMatchers("/api/v1/hobby/**")
+        .permitAll()
+        .requestMatchers("/api/v1/social/**")
+        .permitAll() // Allow unauthenticated access to /api/v1/socia
+        .requestMatchers("/api/v1/project/**")// l
+        .permitAll()
         .anyRequest()
         .authenticated()
         .and()

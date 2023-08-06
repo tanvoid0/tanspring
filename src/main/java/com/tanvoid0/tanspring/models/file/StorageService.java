@@ -25,7 +25,7 @@ import java.util.UUID;
 @Transactional
 public class StorageService {
 
-  private final FileDataRepository fileRepo;
+  private final UserFileDataRepository fileRepo;
   private final AuthenticationService authenticationService;
   private final Faker faker;
   private final ModelMapper mapper;
@@ -59,7 +59,10 @@ public class StorageService {
 //  }
 
   @Transactional
-  public FileDataVO uploadFileToStorage(final MultipartFile file) throws IOException {
+  public UserFileDataVO uploadFileToStorage(final MultipartFile file) throws IOException {
+    if (file.isEmpty()) {
+      return null;
+    }
     final AppUser user = authenticationService.getAuthUser();
     String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
 
@@ -67,14 +70,14 @@ public class StorageService {
     Files.write(path, file.getBytes());
 
     // TODO: it doesn't work as it's an abstract. need to create another class that can reuse this.
-//    final FileData entity = FileData.builder()
-//        .name(fileName)
-//        .type(file.getContentType())
-//        .user(user)
-//        .build();
-//    final FileData savedEntity = fileRepo.save(entity);
-//    return convertEntityToVO(savedEntity);
-    return null;
+    final String fileType = file.getContentType();
+    final UserFileData entity = UserFileData.builder()
+        .name(fileName)
+        .type(fileType)
+        .createdByUser(user)
+        .build();
+    final FileData savedEntity = fileRepo.save(entity);
+    return convertEntityToVO(savedEntity);
   }
 
   public URL readFileFromStorage(final String filename) throws IOException {
@@ -97,7 +100,7 @@ public class StorageService {
     return fileRepo.findByName(filename).orElseThrow(() -> new ResourceNotFoundException("File", "file_path", filename));
   }
 
-  private FileDataVO convertEntityToVO(final FileData entity) {
-    return mapper.map(entity, FileDataVO.class);
+  private UserFileDataVO convertEntityToVO(final FileData entity) {
+    return mapper.map(entity, UserFileDataVO.class);
   }
 }

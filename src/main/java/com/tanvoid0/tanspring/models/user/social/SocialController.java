@@ -4,7 +4,6 @@ import com.tanvoid0.tanspring.common.vo.SwapOrderSequence;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,44 +28,43 @@ public class SocialController {
   }
 
   @GetMapping
-  @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_MODERATOR')")
   public List<SocialVO> get() {
     return service.get();
   }
 
   @GetMapping("/{id}")
-  @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_MODERATOR')")
+//  @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_MODERATOR')")
   public SocialVO get(final @PathVariable("id") long id) {
     return service.get(id);
   }
 
   @PostMapping
-  @PreAuthorize("hasRole('USER')")
+//  @PreAuthorize("hasRole('USER')")
   public SocialVO add(@Valid @RequestBody final NewSocialVO newSocialVO) {
     return service.add(newSocialVO);
   }
 
   @PostMapping("/batch")
-  @PreAuthorize("hasRole('USER')")
+//  @PreAuthorize("hasRole('USER')")
   public List<SocialVO> add(@Valid @RequestBody final List<NewSocialVO> newSocialVOS) {
     return service.add(newSocialVOS);
   }
 
   @PutMapping("/{id}")
-  @PreAuthorize("hasRole('USER')")
+//  @PreAuthorize("hasRole('USER')")
   public SocialVO update(@PathVariable("id") final long id, @Valid @RequestBody UpdateSocialVO updateSocialVO) {
     updateSocialVO.setId(id);
     return service.update(updateSocialVO);
   }
 
-  @PreAuthorize("hasRole('USER')")
+  //  @PreAuthorize("hasRole('USER')")
   @PutMapping("/swap")
   public List<SocialVO> swap(@RequestBody SwapOrderSequence swapOrderSequence) {
     return service.swap(swapOrderSequence);
   }
 
   @DeleteMapping("/{id}")
-  @PreAuthorize("hasRole('USER')")
+//  @PreAuthorize("hasRole('USER')")
   public boolean delete(@PathVariable("id") long id) {
     return service.delete(id);
   }

@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import org.hibernate.annotations.NamedQuery;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,6 +28,7 @@ import jakarta.persistence.UniqueConstraint;
 @Table(name = "user_socials", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"url"})
 })
+@NamedQuery(name = "Social.findAll", query = "select s from Social s order by s.orderSeq")
 public class Social extends BaseEntity {
 
   @Column(nullable = false)

@@ -26,7 +26,7 @@ public class StorageController {
   }
 
   @PostMapping("/local")
-  public FileDataVO uploadFileLocally(@RequestParam("file") final MultipartFile file) throws IOException {
+  public UserFileDataVO uploadFileLocally(@RequestParam("file") final MultipartFile file) throws IOException {
     return service.uploadFileToStorage(file);
   }
 

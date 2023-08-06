@@ -1,6 +1,5 @@
 package com.tanvoid0.tanspring.models.user;
 
-import com.tanvoid0.tanspring.models.file.FileData;
 import com.tanvoid0.tanspring.models.user.career.Career;
 import com.tanvoid0.tanspring.models.user.hobby.Hobby;
 import com.tanvoid0.tanspring.models.user.portfolio.Portfolio;
@@ -110,10 +109,6 @@ public class AppUser implements UserDetails {
 
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private SkillEntity skill;
-
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-  @OrderBy("orderSeq ASC")
-  private Set<FileData> files = new HashSet<>();
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

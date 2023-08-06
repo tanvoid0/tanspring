@@ -86,7 +86,7 @@ public class CareerServiceImpl implements CareerService {
 
   @Override
   public CareerVO getByUsername(String username) {
-    final AppUser user = mapper.map(userService.getUserVOByUsername(username), AppUser.class);
+    final AppUser user = mapper.map(userService.getUserVOByEmail(username), AppUser.class);
     final Career career = repository.findByUser(user).orElseThrow(() -> new ResourceNotFoundException("Career", "userId", user.getId()));
     return convertEntityToVO(career);
   }

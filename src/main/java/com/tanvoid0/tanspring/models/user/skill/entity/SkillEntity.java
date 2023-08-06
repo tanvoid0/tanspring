@@ -9,7 +9,6 @@ import com.tanvoid0.tanspring.models.user.skill.entity.soft.SkillSoft;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
@@ -18,13 +17,18 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.OrderBy;
 
 @Getter
 @Setter
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class SkillEntity extends BaseEntity implements Serializable {
 
@@ -45,21 +49,28 @@ public class SkillEntity extends BaseEntity implements Serializable {
 
   @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, orphanRemoval = true)
   @OrderBy("orderSeq ASC")
-  private Set<SkillFramework> frameworks = new HashSet<>();
+  private Set<SkillFramework> frameworks;
 
   @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, orphanRemoval = true)
   @OrderBy("orderSeq ASC")
-  private Set<SkillHard> hardSkills = new HashSet<>();
+  private Set<SkillHard> hardSkills;
 
   @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, orphanRemoval = true)
   @OrderBy("orderSeq ASC")
-  private Set<SkillSoft> softSkills = new HashSet<>();
+  private Set<SkillSoft> softSkills;
 
   @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, orphanRemoval = true)
   @OrderBy("orderSeq ASC")
-  private Set<SkillLinguistic> linguisticSkills = new HashSet<>();
+  private Set<SkillLinguistic> linguisticSkills;
 
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id", nullable = false)
   private AppUser user;
+
+  public SkillEntity() {
+    this.frameworks = new HashSet<>();
+    this.hardSkills = new HashSet<>();
+    this.softSkills = new HashSet<>();
+    this.linguisticSkills = new HashSet<>();
+  }
 }

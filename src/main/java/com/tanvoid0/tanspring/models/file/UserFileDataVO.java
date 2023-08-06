@@ -15,7 +15,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(callSuper = true)
-public class FileDataVO extends BaseVO {
+public class UserFileDataVO extends BaseVO {
   private String name;
   private String type;
 

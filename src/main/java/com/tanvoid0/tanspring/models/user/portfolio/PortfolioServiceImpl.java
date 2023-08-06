@@ -103,7 +103,7 @@ public class PortfolioServiceImpl implements PortfolioService {
   public UserVO updateInfo(UpdateUserInfoVO updateVO) throws Exception {
     final UserVO userVO = userService.updateInfo(updateVO);
 
-    return userService.getUserVOByUsername(userVO.getUsername());
+    return userService.getUserVOByEmail(userVO.getEmail());
   }
 
   @Override

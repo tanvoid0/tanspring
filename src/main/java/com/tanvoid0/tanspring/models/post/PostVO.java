@@ -29,7 +29,7 @@ public class PostVO {
 
   // post description could not be null or empty
   // post description should have at least 10 characters
-  @ApiModelProperty(value = "Post post description")
+//  @ApiModelProperty(value = "Post post description")
   @NotEmpty
   @Size(min = 10, message = "Post description should have at least 10 characters")
   private String description;

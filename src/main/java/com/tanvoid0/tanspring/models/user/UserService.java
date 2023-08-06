@@ -9,9 +9,11 @@ import java.util.List;
 public interface UserService {
   List<UserVO> getAll();
 
-  AppUser findByUsername(String username);
+  AppUser findByEmail(String username);
 
-  UserVO getUserVOByUsername(long id);
+  UserVO getUserVOByEmail(long id);
+
+  UserVO getUserVOByEmail(String username);
 
   UserVO getUserVOByUsername(String username);
 

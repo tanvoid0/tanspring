@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,7 +30,7 @@ public class AuthenticationService {
 
   public AuthenticationResponseVO register(NewUserVO request) {
 
-    request.setPassword(passwordEncoder.encode(request.getPassword()));
+//    request.setPassword(passwordEncoder.encode(request.getPassword()));
     var user = userService.register(request);
 
     var jwtToken = jwtService.generateToken(user);
@@ -40,15 +40,19 @@ public class AuthenticationService {
   }
 
   public AuthenticationResponseVO login(final LoginUserVO request) {
-    authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(
-            request.getEmail(),
-            request.getPassword()
-        )
-    );
+//    authenticationManager.authenticate(
+//        new UsernamePasswordAuthenticationToken(
+//            request.getEmail(),
+//            passwordEncoder.request.getPassword()
+//        )
+//    );
     var user = repository.findByEmail(request.getEmail())
-        .orElseThrow();
-    return authResponseFromUser(user);
+        .orElseThrow(() -> new BadCredentialsException("Invalid Credentials"));
+    if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+      return authResponseFromUser(user);
+    } else {
+      throw new BadCredentialsException("Invalid Credentials");
+    }
   }
 
   public UserVO authenticate(final HttpServletRequest request) {
@@ -72,5 +76,9 @@ public class AuthenticationService {
     }
     final String username = auth.getName();
     return repository.findByUsernameOrEmail(username, username).orElseThrow(() -> new ResourceNotFoundException("user", "usernameOrEmail", username));
+  }
+
+  public UserVO getPortfolio(final String username) {
+    return userService.getPortfolio(username);
   }
 }

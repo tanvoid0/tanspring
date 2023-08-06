@@ -34,7 +34,7 @@ public class HobbyServiceImpl implements HobbyService {
 
   @Override
   public HobbyVO add(final String username, final NewHobbyVO newVO) {
-    final AppUser user = userService.findByUsername(username);
+    final AppUser user = userService.findByEmail(username);
 
     final Hobby entity = convertVOToEntity(newVO);
     entity.setUser(user);
@@ -61,7 +61,7 @@ public class HobbyServiceImpl implements HobbyService {
 
   @Override
   public List<HobbyVO> findByUsername(final String username) {
-    final AppUser user = userService.findByUsername(username);
+    final AppUser user = userService.findByEmail(username);
     final List<Hobby> hobbies = repository.findAllByUserIdOrderByOrderSeq(user.getId());
     return hobbies.stream().map(this::convertEntityToVO).toList();
   }

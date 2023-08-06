@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +45,7 @@ public class AuthController {
     return service.authenticate(request);
   }
 
-//  @ApiOperation("Get ALl users")
+  //  @ApiOperation("Get ALl users")
 //  @GetMapping
 //  public List<UserVO> getAll() {
 //    log.info("Find all users");
@@ -80,11 +82,11 @@ public class AuthController {
 //  }
 //
 //  @ApiOperation(value = "REST API to fetch portfolio data")
-//  @GetMapping("/portfolio/{username}")
-//  public UserVO getPortfolioByUsername(@PathVariable("username") String username) {
-//    log.info("Find Portfolio details for username {}", username);
-//    return userService.getPortfolio(username);
-//  }
+  @GetMapping("/portfolio/{username}")
+  public UserVO getPortfolioByUsername(@PathVariable("username") String username) {
+    log.info("Find Portfolio details for username {}", username);
+    return service.getPortfolio(username);
+  }
 //
 //  @GetMapping("/career/{username}")
 //  public CareerVO getCareerByUsername(

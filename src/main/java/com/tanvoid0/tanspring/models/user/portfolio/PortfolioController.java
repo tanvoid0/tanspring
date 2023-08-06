@@ -68,7 +68,7 @@ public class PortfolioController {
 
   @PutMapping("/info")
   @ResponseStatus(HttpStatus.OK)
-  @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_MODERATOR')")
+//  @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_MODERATOR')")
   public UserVO updateInfo(
       @Valid @RequestBody final UpdateUserInfoVO updateVO
   ) throws Exception {
@@ -82,9 +82,7 @@ public class PortfolioController {
     return service.deleteProject(id);
   }
 
-  @DeleteMapping
   @GetMapping("/user/{username}")
-  @PreAuthorize("hasRole('USER')")
   public UserVO getUserPortfolio(
       @PathVariable("username") final String username
   ) {

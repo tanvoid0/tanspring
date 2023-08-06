@@ -18,20 +18,20 @@ https://medium.com/@akhileshanand/spring-boot-api-security-with-jwt-and-role-bas
 
 - [ ] Token based Access to data
 - [ ] Portfolio
-  - [x] Online Judge
-  - [ ] Project
+    - [x] Online Judge
+    - [ ] Project
 - [x] Organisation
-  - [x] Academic
-  - [x] Achievement
-  - [x] Certificate
-  - [x] Experience
-  - [x] Volunteer
+    - [x] Academic
+    - [x] Achievement
+    - [x] Certificate
+    - [x] Experience
+    - [x] Volunteer
 - [x] Skill
-  - [x] Hard Skills
-    - [x] Skill Item
-  - [x] Soft Skills
-  - [x] Frameworks
-    - [x] Language
+    - [x] Hard Skills
+        - [x] Skill Item
+    - [x] Soft Skills
+    - [x] Frameworks
+        - [x] Language
 - [x] Hobbies
 - [x] Socials
 - [ ] Better Exception Handling
@@ -39,18 +39,22 @@ https://medium.com/@akhileshanand/spring-boot-api-security-with-jwt-and-role-bas
 # Models
 
 - Skills
-  - BaseSkill
-  - SkillEntity
-    - Set<SkillHard>
-      - name
-      - Set<SkillItem>
-        - Skills
-    - Set<SkillSoft>
-      - BaseSkill
-    - Set<SkillFramework>
-      - Set<SkillLanguage>
-      - Set<SkillLibrary>
+    - BaseSkill
+    - SkillEntity
+        - Set<SkillHard>
+            - name
+            - Set<SkillItem>
+                - Skills
+        - Set<SkillSoft>
+            - BaseSkill
+        - Set<SkillFramework>
+            - Set<SkillLanguage>
+            - Set<SkillLibrary>
 
 - Portfolio
-  - Set<OnlineJudge>
-  - Set<Project>
+    - Set<OnlineJudge>
+    - Set<Project>
+
+Public API
+
+# Leetcode api - https://faisal-leetcode-api.cyclic.app/tanvoid0

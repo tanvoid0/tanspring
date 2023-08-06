@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class NewImageLinkVO {
-  private String title;
+  private String name;
   private String description;
   private String url;
 }

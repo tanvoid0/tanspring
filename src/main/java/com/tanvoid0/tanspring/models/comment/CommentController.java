@@ -1,8 +1,5 @@
 package com.tanvoid0.tanspring.models.comment;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 
 @Api(value = "CRUD REST APIs for Comment Resource")

@@ -20,6 +20,7 @@ import jakarta.persistence.*;
 @Table(name = "user_hobbies", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"title"})
 })
+@org.hibernate.annotations.NamedQuery(name = "Hobby.findAll", query = "select h from Hobby h order by h.orderSeq")
 public class Hobby extends BaseEntity {
   @Column(nullable = false)
   private String title;

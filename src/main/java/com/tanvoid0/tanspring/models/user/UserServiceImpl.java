@@ -48,19 +48,25 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public AppUser findByUsername(final String username) {
-    return repository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+  public AppUser findByEmail(final String email) {
+    return repository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
   }
 
   @Override
-  public UserVO getUserVOByUsername(final long id) {
+  public UserVO getUserVOByEmail(final long id) {
     final AppUser user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
     return mapper.map(user, UserVO.class);
   }
 
   @Override
+  public UserVO getUserVOByEmail(String username) {
+    final AppUser user = this.findByEmail(username);
+    return convertEntityToVo(user);
+  }
+
+  @Override
   public UserVO getUserVOByUsername(String username) {
-    final AppUser user = this.findByUsername(username);
+    final AppUser user = repository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
     return convertEntityToVo(user);
   }
 
